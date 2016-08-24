@@ -16,7 +16,7 @@
 `cd  your project_name`
 
 ## 安装依赖包
-`npm i`
+`npm install`
 
 ## 在浏览器里预览
 `npm run server`
