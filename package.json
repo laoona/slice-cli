@@ -1,6 +1,6 @@
 {
   "name": "qietuzai-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Qietuzai static page template command line",
   "main": "index.js",
   "dependencies": {
