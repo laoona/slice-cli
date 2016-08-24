@@ -1,6 +1,6 @@
 {
     "tpl": {
-        "mobile": {
+        "touch": {
             "url": "https://github.com/laoono/Qietuzai.git"
             , "branch": "master"
         }
