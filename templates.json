@@ -1,0 +1,12 @@
+{
+    "tpl": {
+        "mobile": {
+            "url": "https://github.com/laoono/Qietuzai.git"
+            , "branch": "master"
+        }
+        , "pc": {
+            "url": "https://github.com/laoono/Qietuzai.git"
+            , "branch": "pc"
+        }
+    }
+}
