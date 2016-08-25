@@ -1,4 +1,4 @@
-# qietuzai-cli
+# slice-cli
 
 **切图仔的日常 - 生成日常切图所需项目目录 本机安装环境依赖: node git**
 
@@ -15,13 +15,13 @@
 
 ### 使用方法
 ```
-npm install qietuzai-cli -g
+npm install slice-cli -g
 ```
 
 
 ### 初始化项目
 ```
-Qietuzai init
+slice init
 ```
 
 ### 选择一个项目模板
