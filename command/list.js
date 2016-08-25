@@ -7,11 +7,11 @@
  */
  
 'use strict';
-
+var log = require('retarded-log');
 const config = require('../templates');
 
 module.exports = () => {
-    console.log(config.tpl);   
+    log.g((config.tpl));   
     process.exit();
 };
  
