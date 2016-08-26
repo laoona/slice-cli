@@ -1,7 +1,7 @@
 # slice-cli
 
 **生成日常切图所需项目目录(sass|gulp|browser-sync) 一键产出交付页面**
-本机安装环境依赖: node git
+**本机安装环境依赖: node git**
 
 ```
 ├── src
