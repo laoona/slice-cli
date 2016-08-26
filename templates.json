@@ -1,11 +1,12 @@
 {
     "tpl": {
         "touch": {
-            "url": "https://github.com/laoono/Qietuzai.git"
+            "url": "https://github.com/laoono/slice.git"
             , "branch": "master"
         }
+
         , "pc": {
-            "url": "https://github.com/laoono/Qietuzai.git"
+            "url": "https://github.com/laoono/slice.git"
             , "branch": "pc"
         }
     }
