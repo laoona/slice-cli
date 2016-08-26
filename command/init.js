@@ -50,7 +50,7 @@ module.exports = () => {
             } 
             
             console.log(chalk.green('\n √ Generation completed!'));
-            console.log(`\n please input: cd ${projectName} && npm install \n`);
+            console.log(`\n please input: cd ${projectName} && slice run \n`);
             process.exit();
         });
     });   

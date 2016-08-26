@@ -44,19 +44,19 @@ program
     });
 
 program
-    .command('run')
+    .command('run [Project-name]')
     .alias('r')
-    .description('run a project in browser')
-    .action(() => {
-        require('../command/run')();
+    .description('Run a Project in browser')
+    .action((proDir) => {
+        require('../command/run')(proDir);
     });
 
 program
-    .command('build')
+    .command('build [Project-name]')
     .alias('b')
-    .description('build a project')
-    .action(() => {
-        require('../command/build')();
+    .description('Build a Project')
+    .action((proDir) => {
+        require('../command/build')(proDir);
     });
 
 program.parse(process.argv);

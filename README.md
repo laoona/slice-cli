@@ -36,10 +36,6 @@ slice init
 cd  your project_name
 ```
 
-### install
-```
-npm install
-```
 
 ```
 source_pages //html文件夹目录,页面的添加修改都在此文件夹
@@ -55,11 +51,11 @@ source_pages 可以包含html代码片断([gulp-file-inlcude](https://github.com
 
 ### 在浏览器里预览
 ```
-npm run server
+slice run [Project-name]
 ```
 
 ### 产出页面(交付给小伙伴)
 ```
-npm run build
+slice build [Project-name]
 ```
 
