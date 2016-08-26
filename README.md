@@ -10,7 +10,8 @@
 │   └── fonts
 │   └── jpegs
 │   └── psd
-└── index.html
+│   └── source_pages
+│   └── view 
 ```
 
 ### 使用方法
@@ -38,6 +39,18 @@ cd  your project_name
 ```
 npm install
 ```
+
+```
+source_pages //html文件夹目录,页面的添加修改都在此文件夹
+view //浏览器中预览的html
+```
+
+source_pages 可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
+
+```
+@@include("common.html"); //包含相对于当前html文件的目录下common.html文件
+```   
+
 
 ### 在浏览器里预览
 ```
