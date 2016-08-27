@@ -7,7 +7,7 @@
 ├── src
 │   ├── js
 │   └── images
-│   └── scss
+│   └── sass
 │   └── fonts
 │   └── jpegs
 │   └── psd
