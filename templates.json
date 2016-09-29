@@ -2,7 +2,7 @@
     "tpl": {
         "touch": {
             "url": "https://github.com/laoono/slice.git"
-            , "branch": "master"
+            , "branch": "touch"
         }
 
         , "pc": {
