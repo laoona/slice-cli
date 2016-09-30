@@ -15,6 +15,8 @@ const prompt = require('co-prompt');
 const config = require('../templates');
 const chalk = require('chalk');
 const fs = require('fs');
+const os = require('os');
+const platform = os.platform();
 
 module.exports = () => {
     co(function * () {
@@ -40,7 +42,13 @@ module.exports = () => {
         }
         
         // git命令 远程拉取项目并自定义项目名
-        let cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && rm -rf ./.git`;
+        let cmdStr;
+        if (/^win/g.test(platform)) {
+            cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && del .git`;
+            
+        } else {
+            cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && rm -rf ./.git`;
+        }
         
         console.log(chalk.white('\n Start generating...'));
         exec(cmdStr, (error, stdout, stderr) => {
