@@ -44,7 +44,7 @@ module.exports = () => {
         // git命令 远程拉取项目并自定义项目名
         let cmdStr;
         if (/^win/g.test(platform)) {
-            cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && del /q .git`;
+            cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && rd /s/q .git`;
             
         } else {
             cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch} && rm -rf ./.git`;
