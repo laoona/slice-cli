@@ -59,6 +59,21 @@ program
         require('../command/build')(proDir);
     });
 
+program
+    .command('config')
+    .description('Add a new config key')
+    .alias('c')
+    .option('-l, --list', 'show config list')
+    .action((options) => {
+        var list = options.list;
+        
+        if (list) {
+            require('../command/config.list')();
+        } else {
+            require('../command/config')();
+        }
+    });
+
 program.parse(process.argv);
 
 if (!program.args.length) {
