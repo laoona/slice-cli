@@ -1,17 +1,23 @@
 'use strict'
 const co = require('co');
-const config = require('../config');
+const templates = require('../templates');
 const chalk = require('chalk');
 const fs = require('fs');
 const log = require('retarded-log');
 
 module.exports = () => {
     
-    co(function*() {
-
-        // 打印配置文件信息 
-        console.log(chalk.grey('The last config is: \n'));
-        log.g(config);
+    let configPath = templates.config || '';
+    // 打印配置文件信息 
+    try {
+        require(configPath); 
+    } catch (e) {
+        console.log(chalk.red('Error! No Such Config File'));
         process.exit();
-    });
+    }
+    
+    let config = require(configPath);
+    console.log(chalk.grey('The Last Config Is:'));
+    log.g(config);
+    process.exit();
 };

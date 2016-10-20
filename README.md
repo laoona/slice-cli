@@ -54,6 +54,15 @@ source_pages 可以包含html代码片断([gulp-file-inlcude](https://github.com
 slice run [Project-name]
 ```
 
+
+### 指定 slice 配置文件
+```
+    slice config //显示配置文件路径
+    
+    slice config -l //显示最新的配置文件内容
+    
+    slice config -d <file> //重新指定配置文件路径
+```
 ### 产出页面(交付给小伙伴)
 ```
 slice build [Project-name]

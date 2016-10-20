@@ -1,13 +1,13 @@
 {
     "tpl": {
         "touch": {
-            "url": "https://github.com/laoono/slice.git"
-            , "branch": "touch"
+            "url": "https://github.com/laoono/slice.git",
+            "branch": "touch"
+        },
+        "pc": {
+            "url": "https://github.com/laoono/slice.git",
+            "branch": "pc"
         }
-
-        , "pc": {
-            "url": "https://github.com/laoono/slice.git"
-            , "branch": "pc"
-        }
-    }
+    },
+    "config": "../config.json"
 }

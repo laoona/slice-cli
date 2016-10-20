@@ -61,14 +61,18 @@ program
 
 program
     .command('config')
-    .description('Add a new config key')
+    .description('show config file path')
     .alias('c')
     .option('-l, --list', 'show config list')
+    .option('-d, --dir <file>', 'set config file directory')
     .action((options) => {
         var list = options.list;
+        var dir = options.dir;
         
         if (list) {
             require('../command/config.list')();
+        } else if (dir) {
+            require('../command/config.dir')(dir);
         } else {
             require('../command/config')();
         }
