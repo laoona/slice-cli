@@ -9,5 +9,5 @@
             "branch": "pc"
         }
     },
-    "config": "../config.json"
+    "config": "../config.js"
 }
