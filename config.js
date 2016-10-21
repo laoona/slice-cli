@@ -20,7 +20,7 @@ const config = {
     },
     base64: {
         extensions: [/\?base64$/i],
-        maxImageSize: 8 * 1024
+        maxImageSize: 0 
     }
 };
 
