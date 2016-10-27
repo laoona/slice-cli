@@ -4,16 +4,25 @@
 **本机安装环境依赖: node git**
 
 ```
-├── src
-│   ├── js
-│   └── images
-│   └── sass
-│   └── fonts
-│   └── jpegs
-│   └── psd
-│   └── source_pages
-│   └── view 
+├── js
+└── images
+└── css
+└── sass
+└── fonts
+└── jpegs
+└── psd
+└── source_pages
+└── view 
 ```
+### 说明:
+* sass目录 存放scss样式文件,自动生成平级的css目录
+* source_pages目录 存放html视图文件,在这个目录下面,编写html
+* view目录 对应source_pages目录自动生成的html文件,执行 slice run,可在浏览器里预览
+
+### 功能:
+* 自动添加浏览器私有前缀
+* 代码热更新,浏览器自动刷新
+* 支持base64,只需在资源引用处加上'?base64'
 
 ### 使用方法
 ```
