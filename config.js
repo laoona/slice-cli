@@ -8,7 +8,7 @@
 
 'use strict';
 const config = {
-    auto: {
+    autoprefixer: {
         browsers: [
             "> 1%",
             "last 2 versions",
