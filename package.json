@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Qietuzai static page template command line",
   "main": "index.js",
   "dependencies": {

@@ -11,9 +11,17 @@ program
 program
     .usage('<command>')
 
+program.on('--help', function(){
+    console.log('  Examples:');
+    console.log('');
+    console.log('    $ slice init');
+    console.log('    $ slice run --help');
+    console.log('');
+});
+
 program
     .command('add')
-    .description('Add a new template')
+    .description('新增一个项目模板')
     .alias('a')
     .action(() => {
         require('../command/add')()
@@ -21,7 +29,7 @@ program
 
 program
     .command('list')
-    .description('List all the templates')
+    .description('可用项目模板列表')
     .alias('l')
     .action(() => {
         require('../command/list')()
@@ -29,7 +37,7 @@ program
 
 program
     .command('init')
-    .description('Generate a new project')
+    .description('初始化一个新项目')
     .alias('i')
     .action(() => {
         require('../command/init')()
@@ -37,34 +45,34 @@ program
 
 program
     .command('delete')
-    .description('Delete a template')
+    .description('删除一个项目模板')
     .alias('d')
     .action(() => {
         require('../command/delete')()
     });
 
 program
-    .command('run [Project-name]')
+    .command('run [project-dir]')
     .alias('r')
-    .description('Run a Project in browser')
+    .description('在浏览器运行一个项目')
     .action((proDir) => {
         require('../command/run')(proDir);
     });
 
 program
-    .command('build [Project-name]')
+    .command('build [project-dir]')
     .alias('b')
-    .description('Build a Project')
+    .description('输出项目页面')
     .action((proDir) => {
         require('../command/build')(proDir);
     });
 
 program
     .command('config')
-    .description('show config file path')
+    .description('打印slice-cli配置文件路径')
     .alias('c')
-    .option('-l, --list', 'show config list')
-    .option('-d, --dir <file>', 'set config file directory')
+    .option('-l, --list', '打印当前配置文件信息')
+    .option('-d, --dir <file>', '重新指定slice-cli配置文件')
     .action((options) => {
         var list = options.list;
         var dir = options.dir;
