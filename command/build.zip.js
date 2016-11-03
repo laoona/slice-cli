@@ -16,13 +16,14 @@ const path = require('path');
 module.exports = (projectName) => {
     projectName = projectName || '';
     
-    projectName.length && (projectName = projectName + '/');
-    projectName = path.normalize(projectName);
+    var buildDir = process.cwd() + '/' + projectName + '/';
+    buildDir = path.normalize(buildDir);
 
     require("../lib/gulpfile")(projectName, 'build', function () {
 
+        console.log(buildDir);
         // create a file to stream archive data to.
-        var output = fs.createWriteStream(projectName + 'build.zip');
+        var output = fs.createWriteStream(buildDir + 'build.zip');
         var archive = archiver('zip', {
             store: true // Sets the compression method to STORE.
         });
@@ -42,7 +43,7 @@ module.exports = (projectName) => {
         archive.pipe(output);
 
         // append files from a directory
-        archive.directory(projectName + './build');
+        archive.directory(buildDir + 'build');
 
         // finalize the archive (ie we are done appending files but streams have to finish yet)
         archive.finalize();
