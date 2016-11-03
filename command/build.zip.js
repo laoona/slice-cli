@@ -11,14 +11,18 @@
 const fs = require('fs');
 const archiver = require('archiver');
 const chalk = require('chalk');
+const path = require('path');
 
 module.exports = (projectName) => {
     projectName = projectName || '';
+    
+    projectName.length && (projectName = projectName + '/');
+    projectName = path.normalize(projectName);
 
     require("../lib/gulpfile")(projectName, 'build', function () {
 
         // create a file to stream archive data to.
-        var output = fs.createWriteStream(projectName + './build.zip');
+        var output = fs.createWriteStream(projectName + 'build.zip');
         var archive = archiver('zip', {
             store: true // Sets the compression method to STORE.
         });
