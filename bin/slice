@@ -62,9 +62,15 @@ program
 program
     .command('build [project-dir]')
     .alias('b')
+    .option('-z, --zip', '将build目录打包成build.zip')
     .description('输出项目页面')
-    .action((proDir) => {
-        require('../command/build')(proDir);
+    .action((proDir, options) => {
+        var zip = options.zip;
+        if (zip) {
+            require('../command/build.zip')(proDir);
+        } else {
+            require('../command/build')(proDir);
+        }
     });
 
 program
