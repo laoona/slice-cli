@@ -16,12 +16,11 @@ const path = require('path');
 module.exports = (projectName) => {
     projectName = projectName || '';
     
-    var buildDir = process.cwd() + '/' + projectName + '/';
-    buildDir = path.normalize(buildDir);
+    var buildDir = '';
+    projectName.length && (buildDir = projectName + '/');
 
     require("../lib/gulpfile")(projectName, 'build', function () {
 
-        console.log(buildDir);
         // create a file to stream archive data to.
         var output = fs.createWriteStream(buildDir + 'build.zip');
         var archive = archiver('zip', {
