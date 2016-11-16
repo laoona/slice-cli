@@ -21,6 +21,7 @@ module.exports = (projectName) => {
 
     require("../lib/gulpfile")(projectName, 'build', function () {
 
+        // console.log(fs.existsSync(buildDir + 'build/css/pages/'));
         // create a file to stream archive data to.
         var output = fs.createWriteStream(buildDir + 'build.zip');
         var archive = archiver('zip', {
@@ -42,7 +43,8 @@ module.exports = (projectName) => {
         archive.pipe(output);
 
         // append files from a directory
-        archive.directory(buildDir + 'build');
+        console.log(buildDir);
+        archive.directory(buildDir + 'build/');
 
         // finalize the archive (ie we are done appending files but streams have to finish yet)
         archive.finalize();
