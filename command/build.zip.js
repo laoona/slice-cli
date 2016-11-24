@@ -30,8 +30,8 @@ module.exports = (projectName) => {
 
         // listen for all archive data to be written
         output.on('close', function() {
-            console.log(chalk.white(' \n ' + archive.pointer() + ' total bytes'));
-            console.log(chalk.green(' √ archive build.zip success'));
+            console.log(chalk.white(' Size: ' + archive.pointer() + ' total bytes'));
+            console.log(chalk.green(' √ Archive build.zip Success'));
         });
 
         // good practice to catch this error explicitly
