@@ -9,8 +9,8 @@ module.exports = () => {
     co(function*() {
 
         // 分步接收用户输入的参数
-        let tplName = yield prompt('Template name: ');
-        let gitUrl = yield prompt('Git https link: ');
+        let tplName = yield prompt('Template Name: ');
+        let gitUrl = yield prompt('Git Https Link: ');
         let branch = yield prompt('Branch: ');
 
         // 避免重复添加
@@ -19,15 +19,15 @@ module.exports = () => {
             config.tpl[tplName]['url'] = gitUrl.replace(/[\u0000-\u0019]/g, ''); // 过滤unicode字符
             config.tpl[tplName]['branch'] = branch;
         } else {
-            console.log(chalk.red('Template has already existed!'));
+            console.log(chalk.red('Template Has Already Existed!'));
             process.exit();
         }
 
         // 把模板信息写入templates.json
         fs.writeFile(__dirname + '/../templates.json', JSON.stringify(config), 'utf-8', (err) => {
             if (err) console.log(err);
-            console.log(chalk.green('New template added!\n'));
-            console.log(chalk.grey('The last template list is: \n'));
+            console.log(chalk.green('New Template Added!\n'));
+            console.log(chalk.grey('The Last Template List Is: \n'));
             console.log(config);
             console.log('\n');
             process.exit();
