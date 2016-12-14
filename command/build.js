@@ -11,14 +11,10 @@
 const co = require('co');
 // const prompt = require('co-prompt');
 
-module.exports = (projectName) => {
+module.exports = (projectName, opts) => {
     projectName = projectName || '';
+    opts = opts || {};
     
-    co(function *() {
-        //处理用户输入  
-        // let projectName = (yield prompt(' Project name: '));
-
-        require("../lib/gulpfile")(projectName, 'build');
-    });
-}; 
+    require("../lib/gulpfile")(projectName, 'build', null, opts);
+};
  

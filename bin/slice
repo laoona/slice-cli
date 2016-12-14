@@ -1,15 +1,15 @@
 #!/usr/bin/env node --harmony
-'use strict'
+'use strict';
 
-process.env.NODE_PATH = __dirname + '/../node_modules/'
+process.env.NODE_PATH = __dirname + '/../node_modules/';
 
-const program = require('commander')
-
-program
-    .version(require('../package').version)
+const program = require('commander');
 
 program
-    .usage('<command>')
+    .version(require('../package').version);
+
+program
+    .usage('<command>');
 
 program.on('--help', function(){
     console.log('  Examples:');
@@ -63,13 +63,16 @@ program
     .command('build [project-dir]')
     .alias('b')
     .option('-z, --zip', '将build目录打包成build.zip')
+    .option('-s, --cssOutputStyle [type]', 'sass的编译风格，取值范围：nested,expanded,compact,compressed')
     .description('输出项目页面')
     .action((proDir, options) => {
         var zip = options.zip;
+        var cos = options.cssOutputStyle || 'compact';
+
         if (zip) {
-            require('../command/build.zip')(proDir);
+            require('../command/build.zip')(proDir, {outputStyle: cos});
         } else {
-            require('../command/build')(proDir);
+            require('../command/build')(proDir, {outputStyle: cos});
         }
     });
 
@@ -95,5 +98,5 @@ program
 program.parse(process.argv);
 
 if (!program.args.length) {
-    program.help()
+    program.help();
 }

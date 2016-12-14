@@ -13,8 +13,9 @@ const archiver = require('archiver');
 const chalk = require('chalk');
 const path = require('path');
 
-module.exports = (projectName) => {
+module.exports = (projectName, opts) => {
     projectName = projectName || '';
+    opts = opts || {};
     
     var buildDir = '';
     projectName.length && (buildDir = projectName + '/');
@@ -48,6 +49,6 @@ module.exports = (projectName) => {
 
         // finalize the archive (ie we are done appending files but streams have to finish yet)
         archive.finalize();
-    });
+    }, opts);
 }; 
  
