@@ -11,18 +11,19 @@
 └── fonts
 └── jpegs
 └── psd
-└── source_pages
-└── view 
+└── html
+└── pages 
 ```
 ### 说明:
 * sass目录 存放scss样式文件,自动生成平级的css目录
-* source_pages目录 存放html视图文件,在这个目录下面,编写html
-* view目录 对应source_pages目录自动生成的html文件,执行 slice run,可在浏览器里预览
+* html目录 存放html视图文件,在这个目录下面,编写html
+* pages目录 对应html目录自动生成的.html文件,执行 slice run,可在浏览器里预览
 
 ### 功能:
 * 自动添加浏览器私有前缀
 * 代码热更新,浏览器自动刷新
 * 支持base64,只需在资源引用处加上'?base64'
+* 自动生成css sprite, 例:slice build -s images/sprite-dir 将自动合并images目录下的sprite-dir目录下的所有图片
 
 ### 使用方法
 ```
@@ -47,11 +48,11 @@ cd  your project_name
 
 
 ```
-source_pages //html文件夹目录,页面的添加修改都在此文件夹
-view //浏览器中预览的html
+html //html文件夹目录,页面的添加修改都在此文件夹
+pages //浏览器中预览的html
 ```
 
-source_pages 可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
+html 可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
 
 ```
 @@include("common.html"); //包含相对于当前html文件的目录下common.html文件

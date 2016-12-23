@@ -54,25 +54,38 @@ program
 program
     .command('run [project-dir]')
     .alias('r')
-    .description('在浏览器运行一个项目')
-    .action((proDir) => {
-        require('../command/run')(proDir);
+    .description('在浏览器启动一个项目')
+    .option('-i, --ip', '设置浏览器启动的URL类型为IP')
+    .action((proDir, options) => {
+        var ip = options.ip;
+
+        ip = ip || false;
+        require('../command/run')(proDir, {IP: ip});
     });
 
 program
     .command('build [project-dir]')
     .alias('b')
     .option('-z, --zip', '将build目录打包成build.zip')
-    .option('-s, --cssOutputStyle [type]', 'sass的编译风格，取值范围：nested,expanded,compact,compressed')
+    .option('-c, --cssOutputStyle [type]', 'sass的编译风格，取值范围：nested,expanded,compact,compressed, 默认:compact')
+    .option('-s, --spriteDir <DIR>', '通过指定目录，自动生成css sprite')
     .description('输出项目页面')
     .action((proDir, options) => {
         var zip = options.zip;
         var cos = options.cssOutputStyle || 'compact';
+        var sprDir = options.spriteDir || '';
+
+        var opts = {
+            outputStyle: cos
+            ,spritesmith: {
+                imagepath: sprDir
+            }
+        };
 
         if (zip) {
-            require('../command/build.zip')(proDir, {outputStyle: cos});
+            require('../command/build.zip')(proDir, opts);
         } else {
-            require('../command/build')(proDir, {outputStyle: cos});
+            require('../command/build')(proDir, opts);
         }
     });
 

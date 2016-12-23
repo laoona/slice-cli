@@ -9,15 +9,13 @@
 'use strict';
 
 const co = require('co');
-// const prompt = require('co-prompt');
 
-module.exports = (projectName) => {
+module.exports = (projectName, opts) => {
     projectName = projectName || '';
-    co(function *() {
-        //处理用户输入  
-        // let projectName = (yield prompt(' Project name: '));
+    opts = opts || {};
 
-        require("../lib/gulpfile")(projectName);
+    co(function *() {
+        require("../lib/gulpfile")(projectName, null, null, opts);
     });
 }; 
  
