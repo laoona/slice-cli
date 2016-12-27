@@ -1,8 +1,9 @@
 # slice-cli
 
-**生成日常切图所需项目目录(sass|gulp|browser-sync|autoprefixer|base64) 一键产出交付页面**
+**生成日常切图所需项目目录,构建产出交付页面**
 **本机安装环境依赖: node git**
 
+###生成项目的基本结构:
 ```
 ├── js
 └── images
@@ -16,13 +17,18 @@
 ```
 ### 说明:
 * sass目录 存放scss样式文件,自动生成平级的css目录
+
 * html目录 存放html视图文件,在这个目录下面,编写html
+
 * pages目录 对应html目录自动生成的.html文件,执行 slice run,可在浏览器里预览
 
 ### 功能:
 * 自动添加浏览器私有前缀
+
 * 代码热更新,浏览器自动刷新
+
 * 支持base64,只需在资源引用处加上'?base64'
+
 * 自动生成css sprite, 例:slice build -s images/slice 将自动合并images目录下的slice目录下的所有图片
 
 ### 使用方法
@@ -69,11 +75,11 @@ slice run [Project-Name] //Poject-Name是可选的,若在项目的根目录下�
 
 ### 指定 slice 配置文件
 ```
-    slice config //显示配置文件路径
-    
-    slice config -l //显示最新的配置文件内容
-    
-    slice config -d <file> //重新指定配置文件路径
+slice config //显示配置文件路径
+
+slice config -l //显示最新的配置文件内容
+
+slice config -d <file> //重新指定配置文件路径
 ```
 
 
@@ -95,7 +101,10 @@ slice build -s images/slice/
 
 ### 说明：
 * [Project-Name] 项目目录路径是可选的，若在项目的根目录下，可省略
+
 * 构建雪碧图的目录，必须指定在image/slice目录下
+
 * slice run -i 此条命令，URL将以本机局域网IP的方式，运行slice环境
+
 * images、html、sass,三个目录下的文件名若以"_"开头，则执行slice build后，不会编译生成对应的实体文件
 
