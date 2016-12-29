@@ -7,13 +7,10 @@
 ```
 ├── js
 └── images
-└── css
 └── sass
 └── fonts
-└── jpegs
-└── psd
+└── files
 └── html
-└── pages 
 ```
 ### 说明:
 * sass目录 存放scss样式文件,自动生成平级的css目录

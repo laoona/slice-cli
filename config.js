@@ -28,7 +28,7 @@ const config = {
         // 是否使用 image-set 作为2x图片实现，默认不使用
         useimageset: false,
         // 是否以时间戳为文件名生成新的雪碧图文件，如果启用请注意清理之前生成的文件，默认不生成新文件
-        newsprite: true,
+        // newsprite: true,
         // 给雪碧图追加时间戳，默认不追加
         spritestamp: false
         // 在CSS文件末尾追加时间戳，默认不追加
