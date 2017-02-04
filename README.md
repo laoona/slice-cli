@@ -61,15 +61,12 @@ pages //浏览器中预览的html
 ### slice-cli 使用的模板引擎(gulp-file-include和smarty)
 
 1. gulp-file-include
- > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
-
-2. smarty 
-> 支持大部分smarty模板语法和php基本函数
-
+ > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include))
 ```
 @@include("common.html"); //包含相对于当前html文件的目录下common.html文件
 ```   
-
+2. smarty 
+> 支持大部分smarty模板语法和php基本函数
 
 ### 在浏览器里预览
 ```
