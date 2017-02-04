@@ -65,6 +65,7 @@ pages //浏览器中预览的html
 ```javascript
 @@include("common.html") //包含相对于当前html文件的目录下common.html文件
 ```   
+
 #### 2.smarty 
 > 支持大部分smarty模板语法和php基本函数
 ```javascript
