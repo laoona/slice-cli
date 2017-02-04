@@ -62,12 +62,14 @@ pages //浏览器中预览的html
 
 #### 1.gulp-file-include
  > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include))
+ 
 ```javascript
 @@include("common.html") //包含相对于当前html文件的目录下common.html文件
 ```   
 
 #### 2.smarty 
 > 支持大部分smarty模板语法和基本的php函数
+
 ```javascript
 {{include file="common.tpl"}} //包含相对于当前html文件的目录下common.tpl文件
 ```   
