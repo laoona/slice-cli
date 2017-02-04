@@ -58,15 +58,18 @@ cd  your Project_Name
 templates //html模板文件夹目录,页面的添加修改都在此文件夹
 pages //浏览器中预览的html
 ```
-### slice-cli 使用的模板引擎(gulp-file-include和smarty)
+### slice-cli 使用的模板引擎(gulp-file-include和smarty),默认使用的是smarty，可能通过项目根目录下的config.json配置
 
-1. gulp-file-include
+#### 1.gulp-file-include
  > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include))
-```
-@@include("common.html"); //包含相对于当前html文件的目录下common.html文件
+```javascript
+@@include("common.html") //包含相对于当前html文件的目录下common.html文件
 ```   
-2. smarty 
+#### 2.smarty 
 > 支持大部分smarty模板语法和php基本函数
+```javascript
+{{include file="common.tpl"}} //包含相对于当前html文件的目录下common.tpl文件
+```   
 
 ### 在浏览器里预览
 ```
@@ -107,5 +110,5 @@ slice build -s images/slice/
 
 * slice run -i 此条命令，URL将以本机局域网IP的方式，运行slice环境
 
-* images、html、sass,三个目录下的文件名若以"__"开头，则执行slice build后，不会编译生成对应的实体文件
+* images、html、sass,三个目录下的文件名若以"__"(注意：两条下划线)开头，则执行slice build后，不会编译生成对应的实体文件
 
