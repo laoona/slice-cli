@@ -10,12 +10,12 @@
 └── sass
 └── fonts
 └── files
-└── html
+└── templates
 ```
 ### 说明:
 * sass目录 存放scss样式文件,自动生成平级的css目录
 
-* html目录 存放html视图文件,在这个目录下面,编写html
+* templates目录 存放html视图模板文件,在这个目录下面,编写html模板
 
 * pages目录 对应html目录自动生成的.html文件,执行 slice run,可在浏览器里预览
 
@@ -27,6 +27,8 @@
 * 支持base64,只需在资源引用处加上'?base64'
 
 * 自动生成css sprite, 例:slice build -s images/slice 将自动合并images目录下的slice目录下的所有图片
+
+* 支持smarty
 
 ### 使用方法
 ```
@@ -53,11 +55,16 @@ cd  your Project_Name
 
 ### 项目根目录下的说明：
 ```
-html //html文件夹目录,页面的添加修改都在此文件夹
+templates //html模板文件夹目录,页面的添加修改都在此文件夹
 pages //浏览器中预览的html
 ```
+### slice-cli 使用的模板引擎(gulp-file-include和smarty)
 
-html 可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
+1. gulp-file-include
+ > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include)),例:
+
+2. smarty 
+> 支持大部分smarty模板语法和php基本函数
 
 ```
 @@include("common.html"); //包含相对于当前html文件的目录下common.html文件
@@ -103,5 +110,5 @@ slice build -s images/slice/
 
 * slice run -i 此条命令，URL将以本机局域网IP的方式，运行slice环境
 
-* images、html、sass,三个目录下的文件名若以"_"开头，则执行slice build后，不会编译生成对应的实体文件
+* images、html、sass,三个目录下的文件名若以"__"开头，则执行slice build后，不会编译生成对应的实体文件
 
