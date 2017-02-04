@@ -58,7 +58,7 @@ cd  your Project_Name
 templates //html模板文件夹目录,页面的添加修改都在此文件夹
 pages //浏览器中预览的html
 ```
-### slice-cli 所使用的模板引擎(gulp-file-include和smarty),默认使用的是smarty.可能通过项目根目录下的config.json配置文件进行修改
+### slice-cli 所使用的模板引擎(gulp-file-include和smarty),默认使用的是smarty.可以通过项目根目录下的config.json配置文件进行修改
 
 #### 1.gulp-file-include
  > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include))
