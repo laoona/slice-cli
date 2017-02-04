@@ -67,7 +67,7 @@ pages //浏览器中预览的html
 ```   
 
 #### 2.smarty 
-> 支持大部分smarty模板语法和php基本函数
+> 支持大部分smarty模板语法和基本的php函数
 ```javascript
 {{include file="common.tpl"}} //包含相对于当前html文件的目录下common.tpl文件
 ```   
