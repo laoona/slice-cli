@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.5.9",
+  "version": "1.6.0",
   "description": "Qietuzai static page template command line",
   "main": "index.js",
   "dependencies": {
@@ -20,6 +20,7 @@
     "gulp-file-include": "^0.14.0",
     "gulp-html-beautify": "^1.0.1",
     "gulp-ignore": "^2.0.2",
+    "gulp-pug": "^3.2.0",
     "gulp-replace-path": "^0.4.0",
     "gulp-sass": "^2.3.2",
     "gulp-sequence": "^0.4.6",
