@@ -58,7 +58,7 @@ cd  your Project_Name
 templates //html模板文件夹目录,页面的添加修改都在此文件夹
 pages //浏览器中预览的html
 ```
-### slice-cli 所使用的模板引擎(gulp-file-include和smarty),默认使用的是smarty.可以通过项目根目录下的config.json配置文件进行修改
+### slice-cli 所使用的模板引擎(gulp-file-include、smarty、pug(原jade)),默认使用的是smarty.可以通过项目根目录下的config.json配置文件进行修改
 
 #### 1.gulp-file-include
  > html可以包含html代码片断([gulp-file-inlcude](https://github.com/coderhaoxin/gulp-file-include))
@@ -73,6 +73,19 @@ pages //浏览器中预览的html
 ```javascript
 {{include file="common.tpl"}} //包含相对于当前html文件的目录下common.tpl文件
 ```   
+
+#### 3.pug
+> 原jade模板引擎
+```html
+//- index.pug
+doctype html
+html
+  include includes/head.pug
+  body
+    h1 My Site
+    p Welcome to my super lame site.
+    include includes/foot.pug
+```
 
 ### 在浏览器里预览
 ```
