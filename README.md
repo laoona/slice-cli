@@ -76,6 +76,7 @@ pages //浏览器中预览的html
 
 #### 3.pug
 > 原jade模板引擎
+
 ```html
 //- index.pug
 doctype html
