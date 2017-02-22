@@ -5,12 +5,41 @@
 
 ###生成项目的基本结构:
 ```
-├── js
-└── images
-└── sass
-└── fonts
-└── files
+── LICENSE
+├── README.md
+├── assets
+│   ├── files
+│   ├── fonts
+│   ├── images
+│   │   └── slice
+│   ├── js
+│   └── sass
+│       ├── base
+│       │   ├── _class.scss
+│       │   ├── _config.scss
+│       │   ├── _function.scss
+│       │   ├── _icon.scss
+│       │   ├── _media.query.scss
+│       │   ├── _mixin.scss
+│       │   ├── _reset.inc.pc.scss
+│       │   ├── _var.scss
+│       │   └── _z-index.scss
+│       ├── base.inc.scss
+│       ├── components
+│       ├── layout
+│       ├── pages
+│       └── vendors
+├── config.json
+├── pages
+│   ├── _meta.html
+│   └── example.html
 └── templates
+    ├── _meta.tpl
+    ├── components
+    │   └── README.md
+    ├── example.tpl
+    └── partial
+        └── README.md
 ```
 ### 说明:
 * sass目录 存放scss样式文件,自动生成平级的css目录
