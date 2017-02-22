@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "html static page template command line",
   "main": "index.js",
   "dependencies": {
@@ -28,7 +28,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
-    "retarded-log": "^2.0.5"
+    "retarded-log": "^1.0.5"
   },
   "devDependencies": {},
   "scripts": {
