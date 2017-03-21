@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "html static page template command line",
   "main": "index.js",
   "dependencies": {
@@ -19,7 +19,9 @@
     "gulp-dest-clean": "^0.5.0",
     "gulp-file-include": "^0.14.0",
     "gulp-html-beautify": "^1.0.1",
+    "gulp-if": "^2.0.2",
     "gulp-ignore": "^2.0.2",
+    "gulp-img-base64": "0.0.1",
     "gulp-pug": "^3.2.0",
     "gulp-replace-path": "^0.4.0",
     "gulp-sass": "^2.3.2",

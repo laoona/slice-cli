@@ -72,12 +72,14 @@ program
     .option('-c, --cssOutputStyle <type>', 'sass的编译风格，取值范围：nested,expanded,compact,compressed, 默认:compact')
     .option('-s, --spriteDir <DIR>', '通过指定目录，自动生成css sprite')
     .option('-t, --template <engine>', '设置模板引擎(file-include|smarty) 默认是smarty')
+    .option('-i, --imagemini', '是否开启图片压缩')
     .description('输出项目页面')
     .action((proDir, options) => {
         var zip = options.zip;
         var cos = options.cssOutputStyle || 'compact';
         var sprDir = options.spriteDir || '';
         var tempEngine = options.template;
+        var isIm = options.imagemini;
 
         var opts = {
             outputStyle: cos,
@@ -85,6 +87,7 @@ program
                 imagepath: sprDir
             },
             zip: zip ? true : false,
+            isIm: isIm ? true : false,
             template: tempEngine
         };
 
