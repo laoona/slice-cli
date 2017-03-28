@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "description": "html static page template command line",
   "main": "index.js",
   "dependencies": {
