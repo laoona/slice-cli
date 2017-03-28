@@ -113,6 +113,14 @@ program
         }
     });
 
+program
+    .command('fetch [project-dir]')
+    .description('导出模板dataManifest')
+    .alias('f')
+    .action((proDir) => {
+        require('../command/fetch')(proDir);
+    });
+
 program.parse(process.argv);
 
 if (!program.args.length) {
