@@ -117,8 +117,11 @@ program
     .command('fetch [project-dir]')
     .description('导出模板dataManifest')
     .alias('f')
-    .action((proDir) => {
-        require('../command/fetch')(proDir);
+    .option('-d, --del', '删除模板dataManifest输出的文件')
+    .action((proDir, options) => {
+        var action = options.del ? 'del' : '';
+
+        require('../command/fetch')(proDir, action);
     });
 
 program.parse(process.argv);

@@ -13,7 +13,7 @@ const fs = require('fs');
 const request = require('then-request');
 const chalk = require('chalk');
 
-module.exports = (projectName) => {
+module.exports = (projectName, action) => {
     projectName = projectName || '';
 
     const __projectDir = path.normalize(process.cwd() + '/' + projectName + "/");
@@ -47,20 +47,27 @@ module.exports = (projectName) => {
         return console.log('FETCH-ERROR: ' + chalk.red('✘') + ' ' + chalk.blue('smarty config Not found'));
     }
 
-    for (var k in data) {
-        isHas = true;
-        let url = data[k];
-        let fileName = k.replace(/[\/\\]/gi, '-');
+    function delFetch(filePath) {
+        fs.exists(filePath, function (flag) {
 
-        fileName = getFileName(fileName);
+            if (!flag) {
+                return console.log(('FETCH-ERROR: ' +  chalk.red('✘') + ' No such file ' + chalk.blue(filePath)));
+            }
 
-        if (!/^http(s|):\/\//gi.test(url)) continue;
+            fs.unlink(filePath, function (err) {
+                if (err) {
+                    return console.log(('FETCH-ERROR: ' +  chalk.red('✘') + ' ' + chalk.blue(err)));
+                }
+
+                console.log('FETCH-SUCCESS: ' + chalk.green('✔') + ' deleted ' + chalk.blue(filePath))
+             })
+        });
+    }
+
+    function addFetch(url, filePath, fileName) {
 
         request('GET', url).done(function (res) {
-
             var data = (res.getBody().toString());
-
-            var filePath = path.resolve(projectDir, 'data/', fileName + '.json');
 
             fs.writeFile(filePath, data, function (err) {
                 if (err) {
@@ -72,7 +79,29 @@ module.exports = (projectName) => {
         });
     }
 
-    if (!isHas) {
+    for (var k in data) {
+        isHas = true;
+
+        let url = data[k];
+        let fileName = k.replace(/[\/\\]/gi, '-');
+        fileName = getFileName(fileName);
+
+        if (!/^http(s|):\/\//gi.test(url)) continue;
+
+        var filePath = path.resolve(projectDir, 'data/', fileName + '.json');
+
+        switch (action) {
+            case 'del':
+                delFetch(filePath);
+                break;
+
+            default:
+                addFetch(url, filePath, fileName);
+                break;
+        }
+    }
+
+    if (!isHas && action !== 'del') {
 
         return console.log('FETCH-ERROR: ' + chalk.red('✘') + ' ' + chalk.blue('smarty config dataManifest key Not found'));
     }
