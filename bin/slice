@@ -46,7 +46,7 @@ program
 program
     .command('delete')
     .description('删除一个项目模板')
-    .alias('d')
+    .alias('del')
     .action(() => {
         require('../command/delete')()
     });
@@ -94,6 +94,14 @@ program
         require('../command/build')(proDir, opts);
     });
 
+program
+    .command('deploy [project-dir]')
+    .description('构建发布页面')
+    .alias('d')
+    .action((proDir) => {
+
+        require('../command/deploy')(proDir);
+    });
 program
     .command('config')
     .description('打印slice-cli配置文件路径')
