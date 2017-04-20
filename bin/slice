@@ -61,7 +61,7 @@ program
         var ip = options.ip;
         var tempEngine = options.template;
 
-        ip = ip || false;
+        ip = ip || true;
         require('../command/run')(proDir, {IP: ip, template: tempEngine});
     });
 
