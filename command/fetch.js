@@ -47,20 +47,31 @@ module.exports = (projectName, action) => {
         return console.log('FETCH-ERROR: ' + chalk.red('✘') + ' ' + chalk.blue('smarty config Not found'));
     }
 
+
+    var dataPath = path.resolve(projectDir, 'data/');
+
+    try {
+        if (!fs.existsSync(dataPath)) {
+            fs.mkdirSync(dataPath);
+        }
+    } catch (e) {
+        return console.log('FETCH-ERROR: ' + chalk.red('✘') + ' ' + chalk.blue('create data path failed'));
+    }
+
     function delFetch(filePath) {
         fs.exists(filePath, function (flag) {
 
             if (!flag) {
-                return console.log(('FETCH-ERROR: ' +  chalk.red('✘') + ' No such file ' + chalk.blue(filePath)));
+                return console.log(('FETCH-ERROR: ' + chalk.red('✘') + ' No such file ' + chalk.blue(filePath)));
             }
 
             fs.unlink(filePath, function (err) {
                 if (err) {
-                    return console.log(('FETCH-ERROR: ' +  chalk.red('✘') + ' ' + chalk.blue(err)));
+                    return console.log(('FETCH-ERROR: ' + chalk.red('✘') + ' ' + chalk.blue(err)));
                 }
 
                 console.log('FETCH-SUCCESS: ' + chalk.green('✔') + ' deleted ' + chalk.blue(filePath))
-             })
+            })
         });
     }
 
@@ -83,7 +94,8 @@ module.exports = (projectName, action) => {
         isHas = true;
 
         let url = data[k];
-        let fileName = k.replace(/[\/\\]/gi, '-');
+        let fileName = k.replace(/[\/\\]/gi, '@');
+        fileName = fileName.replace(/^\.+/gi, '');
         fileName = getFileName(fileName);
 
         if (!/^http(s|):\/\//gi.test(url)) continue;
