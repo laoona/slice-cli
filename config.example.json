@@ -32,10 +32,5 @@
             "Firefox > 20",
             "iOS 7"
         ]
-    },
-    // base64配置
-    "base64": {
-        // 允许的最大图片大小 单位kb
-        "maxImageSize": 0
     }
 }
