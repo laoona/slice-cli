@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "1.9.8",
+  "version": "1.9.9",
   "description": "html static page template command line",
   "main": "index.js",
   "dependencies": {
@@ -34,7 +34,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sequence": "^0.4.6",
     "gulp-slice-sprite": "0.0.3",
-    "gulp-smarty4js-render": "^0.1.5",
+    "gulp-smarty4js-render": "^0.1.7",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tinypng-nokey-plus": "^1.0.0",
     "gulp-uglify": "^2.1.2",
