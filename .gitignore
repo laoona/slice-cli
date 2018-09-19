@@ -250,3 +250,4 @@ paket-files/
 .idea/
 *.sln.iml
 /node_modules/
+package-lock.json
