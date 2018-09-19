@@ -57,12 +57,14 @@ program
     .description('在浏览器启动一个项目')
     .option('-i, --ip', '设置浏览器启动的URL类型为IP')
     .option('-t, --template <engine>', '设置模板引擎(file-include|smarty) 默认是smarty')
+    .option('-p, --port <port>', '设置启动的端口号,默认3000')
     .action((proDir, options) => {
         var ip = options.ip;
         var tempEngine = options.template;
+        const port = options.port || 3000;
 
         ip = ip || true;
-        require('../command/run')(proDir, {IP: ip, template: tempEngine});
+        require('../command/run')(proDir, {IP: ip, template: tempEngine, port});
     });
 
 program
