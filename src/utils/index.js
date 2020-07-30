@@ -10,12 +10,12 @@ const chalk = require('chalk');
 const path = require('path');
 
 const Utils = {
-  replaceDir (dir, projectDir) {
+  replaceDir (dir = '', projectDir) {
     var temp = projectDir.replace(/\/+$/g, '/');
 
     return dir.replace(temp, '').replace(/^(\/|\\)/g, '');
   },
-  logChanged (dir, projectDir) {
+  logChanged (dir = '', projectDir) {
     console.log('[' + chalk.green('SLICE') + '] ' + chalk.magenta(this.replaceDir(dir, projectDir)));
   },
   fixedWinPath (pathName) {

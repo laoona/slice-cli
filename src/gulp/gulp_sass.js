@@ -16,23 +16,24 @@ const browserSync = require("browser-sync").get('slice-server');
 const projectDir = process.cwd();
 const utils = require('../utils');
 
-const src = path.join(projectDir, './src')
+const src = path.join(projectDir, './assets');
+const sassDir = path.join(src, '/sass/**/*.scss');
+const distCssDir = path.join(src, '/css');
+
 let imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
 
 module.exports = function () {
-  console.log('compile scss');
-  return gulp.src(['src/**/*.scss'])
+  return gulp.src([sassDir])
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(sourcemaps.write('dist/.maps'))
-    .pipe(gulp.dest('dist'))
+    .pipe(sourcemaps.write('./.maps'))
+    .pipe(gulp.dest(distCssDir))
+
     .pipe(replace(new RegExp(imgPattern, 'g'), function (match, __absolutePath__) {
-      var __path = path.relative(path.dirname(__absolutePath__), projectDir + src + '/images');
+      const __path = path.relative(path.dirname(__absolutePath__), projectDir + src + '/images');
 
-      __path = utils.fixedWinPath(__path);
-
-      return __path;
+      return utils.fixedWinPath(__path);
     }))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(distCssDir))
     .pipe(browserSync.stream({match: '**/*.css'}));
 };

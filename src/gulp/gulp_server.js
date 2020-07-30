@@ -9,12 +9,24 @@
 const path = require('path');
 const browserSync = require('browser-sync').create('slice-server');
 const gulp = require('gulp');
+const del = require('del');
+
 const gulpSass = require('./gulp_sass');
+const gulpSmarty = require('./gulp_smarty');
+
 const utils = require("../utils");
 
 const projectDir = process.cwd();
+const src = path.join(projectDir, './assets');
+const tplDir = path.join(projectDir, './templates');
 
-module.exports = ( env, options = {}) => {
+const jsDir = projectDir + src + '/js/**/*.js';
+const imagesDir = projectDir + src + '/images/**/*.*';
+const fontsDir = projectDir + src + '/fonts/**/*.*';
+const filesDir = projectDir + src + '/files/**/*.*';
+const arr = [jsDir, imagesDir, fontsDir, filesDir];
+
+module.exports = (env, options = {}) => {
   // browser-sync的配置
   const bsOptions = {
     server: {
@@ -32,56 +44,53 @@ module.exports = ( env, options = {}) => {
     notify: false,
     ghostMode: false,
     open: 'external',
+    logPrefix: 'SLICE',
+    logFileChanges: false,
     // middleware: [...jsonPlaceholderProxy],
   };
 
   browserSync.init(bsOptions);
 
   gulp.task('bs_sass', () => gulpSass());
+  const compile = gulp.parallel('bs_sass');
 
-  // 通过BS监测sassDir
-  browserSync.watch(path.join(projectDir, './src/**/*.scss')).on('change', function (dir) {
+  gulp.task('bs_smarty', async () => {
+    await gulpSmarty();
+
+    browserSync.reload();
+  });
+
+  const compileSmarty = gulp.parallel('bs_smarty');
+
+  // 通过BS监测sass文件执行编译
+  browserSync.watch(path.join(projectDir, '/**/*.scss')).on('change', async (dir) => {
     utils.logChanged(dir, projectDir);
-    gulp.parallel('bs_sass')();
-  }).on('add', function (dir) {
-    (arguments.length == 1) && (gulp.series(['sass-watch']), utils.logChanged(dir, projectDir));
-  });
-
-  return
-
-
-
-  browserSync.watch(sassDir).on('unlink', function (dir) {
-
-    del([projectDir + src + '/css/**/*']).then(function () {
-      Utils.logChanged(dir, projectDir);
-      gulp.start(['sass-watch']);
+    compile();
+  }).on('add', (dir) => {
+    (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
+  }).on('unlink', (dir) => {
+    del([path.join(src, '/css/**/*')]).then(() => {
+      utils.logChanged(dir, projectDir);
+      compile();
     });
   });
 
-  // 通过BS监测tplDir
-  browserSync.watch(tplDir).on('change', function (dir) {
-    Utils.logChanged(dir, projectDir);
-    gulp.start(['tpl-watch']);
-  }).on('add', function (dir) {
-    (arguments.length == 1) && (gulp.start(['tpl-watch']), Utils.logChanged(dir, projectDir));
-  });
+  // 通过BS监测smarty编译
+  browserSync.watch(path.join(tplDir, '/**/*.tpl')).on('change', dir => {
+    utils.logChanged(dir, projectDir);
+    compileSmarty();
 
-  browserSync.watch(tplDir).on('unlink', function (dir) {
+  }).on('add', dir => {
+    (arguments.length == 1) && (compileSmarty(), utils.logChanged(dir, projectDir));
+  }).on('unlink', dir => {
 
-    del([projectDir + src + '/pages/**/*']).then(function () {
-      Utils.logChanged(dir, projectDir);
-      gulp.start(['tpl-watch']);
+    del([src + '/pages/**/*']).then(function () {
+      utils.logChanged(dir, projectDir);
+      compileSmarty();
     });
   });
 
-  // 通过BS监测const.json
-  browserSync.watch(smartyConf.constPath).on('change', function (dir) {
-    Utils.logChanged(dir, projectDir);
-    gulp.start(['tpl-watch']);
-  });
-
-  arr.map(function (v) {
+  arr.map(v => {
     browserSync.watch(v).on('change', function (dir) {
       browserSync.reload(dir);
     }).on('add', function (dir) {
@@ -91,21 +100,9 @@ module.exports = ( env, options = {}) => {
     });
   });
 
-
-
-  // 通过BS监测tplDir下的scss文件 执行scss编译
-  browserSync.watch(tplDirRoot + '*.scss').on('change', function (dir) {
-    Utils.logChanged(dir, projectDir);
-    gulp.start(['sass-watch']);
-  }).on('add', function (dir) {
-    (arguments.length == 1) && (gulp.start(['sass-watch']), Utils.logChanged(dir, projectDir));
-  });
-
-  browserSync.watch(tplDirRoot + '*.scss').on('unlink', function (dir) {
-
-    del([projectDir + src + '/css/**/*']).then(function () {
-      Utils.logChanged(dir, projectDir);
-      gulp.start(['sass-watch']);
-    });
+  // 通过BS监测const.json
+  browserSync.watch(path.join(tplDir, '/**/*.json')).on('change', function (dir) {
+    utils.logChanged(dir, projectDir);
+    compileSmarty();
   });
 }
