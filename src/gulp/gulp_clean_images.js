@@ -33,7 +33,7 @@ const delImageByBase64 = () => {
 
     // 匹配文件内容中含有. ?base64的路径
     const matches = file.contents.toString().match(/\..*\?base64/g);
-  
+
     if (matches && matches.length) {
       matches.forEach(img => {
         let loc = path.join(path.dirname(file.path), img);
@@ -55,7 +55,7 @@ const delImageByBase64 = () => {
 
 module.exports = function (env, command, date) {
 
-  return gulp.src(['src/**/*.wxss', 'src/**/*.scss'])
+  return gulp.src(['src/**/*.scss'])
     .pipe(delImageByBase64())
     .on('end', () => {
       const start = +date;

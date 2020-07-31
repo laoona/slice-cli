@@ -17,6 +17,7 @@ program
 
 program
   .command('init')
+  .alias('i')
   .description('初始化一个新项目')
   .action(function(cmd) {
     cmdValue = cmd;
@@ -30,6 +31,20 @@ program
   .action(function(cmd) {
     cmdValue = cmd;
     require('../command/run')();
+  });
+
+program
+  .command('build [project-dir]')
+  .alias('b')
+  .option('-z, --zip', '将build目录打包成build.zip')
+  .option('-c, --cssOutputStyle <type>', 'sass的编译风格，取值范围：nested,expanded,compact,compressed, 默认:compact')
+  .option('-s, --spriteDir <DIR>', '通过指定目录，自动生成css sprite')
+  .option('-i, --imagemini', '是否开启图片压缩')
+  .description('输出项目页面')
+  .action((proDir, options) => {
+    cmdValue = options;
+
+    require('../command/build')(options);
   });
 
 program.parse(process.argv);
