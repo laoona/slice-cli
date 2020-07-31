@@ -14,7 +14,7 @@ const bsOthers = require('../bs_watch/others');
 
 const projectDir = process.cwd();
 
-module.exports = (env, options = {}) => {
+module.exports = (config) => {
   // browser-sync的配置
   const bsOptions = {
     server: {
@@ -45,7 +45,7 @@ module.exports = (env, options = {}) => {
   bsSass();
 
   // bs监听smarty
-  bsSmarty();
+  bsSmarty(config);
 
   // bs监听其它文件
   bsOthers();

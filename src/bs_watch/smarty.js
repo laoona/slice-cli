@@ -18,9 +18,9 @@ const projectDir = process.cwd();
 const tplDir = path.join(projectDir, './templates');
 const src = path.join(projectDir);
 
-const compile = () => {
+const compile = (config) => {
   gulp.task('bs_smarty', async () => {
-    await gulpSmarty();
+    await gulpSmarty(config);
 
     browserSync.reload();
   });
@@ -28,24 +28,33 @@ const compile = () => {
   gulp.parallel('bs_smarty')();
 }
 
-module.exports = () => {
+module.exports = (config) => {
   // 通过BS监测smarty编译
   browserSync.watch(path.join(tplDir, '/**/*.tpl')).on('change', dir => {
     utils.logChanged(dir, projectDir);
-    compile();
+    compile(config);
   }).on('add', dir => {
-    (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
+    (arguments.length == 1) && (compile(config), utils.logChanged(dir, projectDir));
   }).on('unlink', dir => {
 
     del([src + '/pages/**/*']).then(function () {
       utils.logChanged(dir, projectDir);
-      compile();
+      compile(config);
     });
   });
 
+  let constPath;
+
+  try {
+    constPath = path.join(src, config.smarty.constPath);
+  } catch (e) {
+
+  }
+
   // 通过BS监测const.json
-  browserSync.watch(path.join(src, '/**/*.json')).on('change', function (dir) {
+  if (!constPath) return;
+  browserSync.watch(constPath).on('change', function (dir) {
     utils.logChanged(dir, projectDir);
-    compile();
+    compile(config);
   });
 }

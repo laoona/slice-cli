@@ -18,16 +18,17 @@ const baseDir = path.join(projectDir, './templates');
 const srcFiles = path.join(baseDir, './**/*.tpl');
 const distDir = path.join(projectDir, '/pages');
 
-const smarty4jsConf = {
-  baseDir,
-  templateDataDir: baseDir,
-/*
-  dataManifest: smartyConf.dataManifest || {},
-  constPath: smartyConf.constPath,
-*/
-};
+module.exports = (config = {}) => {
+  const smartyConf = config.smarty || {};
 
-module.exports = () => {
+  const smarty4jsConf = {
+    baseDir: smartyConf.baseDir,
+    templateDataDir: smartyConf.templateDataDir || projectDir,
+    dataManifest: smartyConf.dataManifest || {},
+    constPath: smartyConf.constPath,
+    rootDir: smartyConf.rootDir ? path.resolve(projectDir, smartyConf.rootDir) : path.join(projectDir, '/templates/../../')
+  };
+
   return gulp.src([srcFiles])
     .pipe(smarty4js(smarty4jsConf))
     .on('error', function (error) {
