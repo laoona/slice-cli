@@ -18,6 +18,8 @@ const gulpCleanImages = require('./gulp/gulp_clean_images');
 
 const buildSmarty = require('./build/build_smarty');
 const buildZip = require('./build/build_zip');
+const buildSass = require('./build/build_sass');
+const buildImages = require('./build/build_images');
 
 const del = require('del');
 const sliceConf = require('../config');
@@ -71,6 +73,12 @@ module.exports = function (command = 'run', opts = {}) {
       .pipe(gulp.dest(path.join(projectDir, "/dist")));
   });
 
+  // 构建sass文件
+  gulp.task('build:sass', () => buildSass(opts, config));
+
+  // 构建images文件
+  gulp.task('build:images', () => buildImages(opts, config));
+
   // 清理目录
   gulp.task('clean', async () => {
     await del(['./dist/**']);
@@ -90,7 +98,7 @@ module.exports = function (command = 'run', opts = {}) {
   }
 
   if(command === 'build') {
-    tasks.push(...['build:templates', 'build:smarty', 'clean:image']);
+    tasks.push(...['build:images', 'build:templates', 'build:smarty', 'build:sass', 'clean:image']);
     opts.zip && tasks.push('build:zip');
   }
 

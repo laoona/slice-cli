@@ -9,7 +9,7 @@
 'use strict';
 const config = {
     autoprefixer: {
-        browsers: [
+        overrideBrowserslist: [
             "> 1%",
             "last 2 versions",
             "Android >= 2.0",
@@ -20,7 +20,7 @@ const config = {
     },
     base64: {
         extensions: [/\?base64$/i],
-        maxImageSize: 0 
+        maxImageSize: 0
     },
     spritesmith: {
         // 各图片间间距，如果设置为奇数，会强制+1以保证生成的2x图片为偶数宽高，默认 0

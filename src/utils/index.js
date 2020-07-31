@@ -23,7 +23,7 @@ const Utils = {
     pathName = pathName.replace(/\.\\/g, './');
     pathName = pathName.replace(/\.{2}\\/g, '../');
 
-    return pathName;
+    return path.normalize(pathName);
   },
   getExtensionByTemplate (tempEngine) {
     tempEngine = tempEngine || '';

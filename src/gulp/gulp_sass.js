@@ -16,9 +16,9 @@ const browserSync = require("browser-sync").get('slice-server');
 const projectDir = process.cwd();
 const utils = require('../utils');
 
-const src = path.join(projectDir, './assets');
-const sassDir = path.join(src, '/sass/**/*.scss');
-const distCssDir = path.join(src, '/css');
+const src = '/assets';
+const sassDir = path.join(projectDir, src, '/sass/**/*.scss');
+const distCssDir = path.join(projectDir, src, '/css');
 
 let imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
 
