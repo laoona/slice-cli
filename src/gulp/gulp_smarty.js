@@ -21,8 +21,10 @@ const distDir = path.join(projectDir, '/pages');
 const smarty4jsConf = {
   baseDir,
   templateDataDir: baseDir,
+/*
   dataManifest: smartyConf.dataManifest || {},
   constPath: smartyConf.constPath,
+*/
 };
 
 module.exports = () => {
