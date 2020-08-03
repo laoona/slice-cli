@@ -22,25 +22,24 @@ const projectDir = process.cwd();
 const src = '/assets';
 
 module.exports = (opts, config = {}) => {
-    const imagesFilter = filter(['**/*.png', '**/*.jpg', '**/*.jpeg', '!**/__*.png', '!**/demo/*.*'], {restore: true});
-    const isFilterPreName = utils.isFilterPreName;
-    const useTinypng = config.tinypng || false;
-    const imageminConf = {
-        optimizationLevel: 6,
-        progressive: true,
-        interlaced: true
-    };
+  const imagesFilter = filter(['**/*.png', '**/*.jpg', '**/*.jpeg', '!**/__*.png', '!**/demo/*.*'], {restore: true});
+  const isFilterPreName = utils.isFilterPreName;
+  const useTinypng = config.tinypng || false;
 
-    const buildDir = path.join(projectDir, '/dist');
+  const buildDir = path.join(projectDir, '/dist');
 
-    console.log((opts.isIm) && !useTinypng);
+  function handleError(error) {
+    console.log(error.toString());
+    this.emit('end');
+  }
 
-    return gulp.src(projectDir + src + '/images/**/*.jpg')
-      .pipe(debug({title: 'SLICE-IMAGES: ' + gutil.colors.green('✔')}))
-      .pipe(imagesFilter)
-      .pipe(gulpif(((opts.isIm) && !useTinypng), imagemin()))
-      .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
-      .pipe(imagesFilter.restore)
-      .pipe(ignore.exclude(isFilterPreName))
-      .pipe(gulp.dest(buildDir + src + '/images'))
+  return gulp.src(projectDir + src + '/images/**')
+    .pipe(debug({title: 'SLICE-IMAGES: ' + gutil.colors.green('✔')}))
+    .pipe(imagesFilter)
+    .pipe(gulpif(((opts.isIm) && !useTinypng), imagemin()))
+    .on('error', handleError)
+    .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
+    .pipe(imagesFilter.restore)
+    .pipe(ignore.exclude(isFilterPreName))
+    .pipe(gulp.dest(buildDir + src + '/images'))
 }

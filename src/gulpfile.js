@@ -20,11 +20,16 @@ const buildSmarty = require('./build/build_smarty');
 const buildZip = require('./build/build_zip');
 const buildSass = require('./build/build_sass');
 const buildImages = require('./build/build_images');
+const buildSprite = require('./build/build_sprite');
+const buildSpriteFixed = require('./build/build_sprite_fixed');
+
+const buildFonts = require('./build/build_fonts');
+const buildJs = require('./build/build_js');
 
 const del = require('del');
 const sliceConf = require('../config');
 
-const {series} = gulp;
+const {series, parallel} = gulp;
 const projectDir = process.cwd();
 
 module.exports = function (command = 'run', opts = {}) {
@@ -39,7 +44,7 @@ module.exports = function (command = 'run', opts = {}) {
   }
 
   // 合并slice、项目的配置文件
-  const config = merge({}, sliceConf ,projectConf)
+  const config = merge({}, sliceConf, projectConf)
 
   const smartyConf = config.smarty || {};
 
@@ -84,21 +89,44 @@ module.exports = function (command = 'run', opts = {}) {
     await del(['./dist/**']);
   });
 
+  // 清理run目录
+  gulp.task('clean:run', async () => {
+    await del(['./pages/**', './assets/css/**']);
+  });
+
   // 清理样式引用的图片
   gulp.task('clean:image', () => gulpCleanImages('', command, date));
 
   // build-zip 任务
   gulp.task('build:zip', () => buildZip());
 
+  // build-sprite 任务
+  gulp.task('build:sprite', () => buildSprite(opts, config));
+
+  // build-sprite-fixed 任务
+  gulp.task('build:sprite:fixed', async () => {
+    await buildSpriteFixed()
+    const projectDir = process.cwd();
+    const buildDir = path.join(projectDir, '/dist');
+
+    del([buildDir], {force: true});
+  });
+
+  // build-fonts 任务
+  gulp.task('build:fonts', () => buildFonts(opts, config));
+  // build-js 任务
+
+  gulp.task('build:js', () => buildJs(opts, config));
+
   // task列表
   const tasks = ['clean', 'clone'];
 
   if (command === 'run') {
-    tasks.push(...['compile:sass', 'compile:smarty', 'server']);
+    tasks.push(...['clean:run', 'compile:sass', 'compile:smarty', 'server']);
   }
 
   if(command === 'build') {
-    tasks.push(...['build:images', 'build:templates', 'build:smarty', 'build:sass', 'clean:image']);
+    tasks.push(...['build:images', parallel('build:templates', 'build:fonts', 'build:js'), 'build:smarty', 'build:sass', 'build:sprite', 'clean:image']);
     opts.zip && tasks.push('build:zip');
   }
 

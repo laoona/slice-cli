@@ -8,13 +8,31 @@
 
 const path = require('path');
 const browserSync = require('browser-sync').create('slice-server');
+const {createProxyMiddleware} = require('http-proxy-middleware');
+
 const bsSass = require('../bs_watch/sass');
 const bsSmarty = require('../bs_watch/smarty');
 const bsOthers = require('../bs_watch/others');
 
+
 const projectDir = process.cwd();
 
 module.exports = (config) => {
+
+  /**
+   * Configure proxy middleware
+   */
+  const proxyConfig = config.devServer ? config.devServer.proxy : undefined;
+  const jsonPlaceholderProxy = [];
+
+  if (proxyConfig) {
+    for (let proxyItem of Object.keys(proxyConfig)) {
+      jsonPlaceholderProxy.push(
+        createProxyMiddleware(proxyItem, proxyConfig[proxyItem])
+      );
+    }
+  }
+
   // browser-sync的配置
   const bsOptions = {
     server: {
@@ -36,7 +54,7 @@ module.exports = (config) => {
     logPrefix: 'SLICE',
     logFileChanges: false,
 */
-    // middleware: [...jsonPlaceholderProxy],
+    middleware: [...jsonPlaceholderProxy],
   };
 
   browserSync.init(bsOptions);
