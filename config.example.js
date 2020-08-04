@@ -1,4 +1,4 @@
-{
+module.exports = {
     // 使用的模板引擎 默认smarty
     "template": "smarty",
     // 模板选项

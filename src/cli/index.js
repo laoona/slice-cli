@@ -34,18 +34,31 @@ program
   });
 
 program
-  .command('build [project-dir]')
+  .command('build')
   .alias('b')
   .option('-z, --zip', '将build目录打包成build.zip')
   .option('-c, --cssOutputStyle <type>', 'sass的编译风格，取值范围：nested,expanded,compact,compressed, 默认:compact')
   .option('-s, --spriteDir <DIR>', '通过指定目录，自动生成css sprite')
   .option('-i, --imagemini', '是否开启图片压缩')
   .description('输出项目页面')
-  .action((proDir, options) => {
+  .action((options) => {
     cmdValue = options;
 
     require('../command/build')(options);
   });
+
+program
+  .command('fetch')
+  .description('导出模板dataManifest')
+  .alias('f')
+  .option('-d, --del', '删除模板dataManifest输出的文件')
+  .action((options) => {
+    cmdValue = options;
+    const action = options.del ? 'del' : '';
+
+    require('../command/fetch')('', action);
+  });
+
 
 program.parse(process.argv);
 
