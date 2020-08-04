@@ -51,6 +51,11 @@ module.exports = (config) => {
 
   }
 
+  browserSync.watch(path.join(projectDir, '/data/**/*.json')).on('change', function (dir) {
+    utils.logChanged(dir, projectDir);
+    compile(config);
+  });
+
   // 通过BS监测const.json
   if (!constPath) return;
   browserSync.watch(constPath).on('change', function (dir) {

@@ -22,17 +22,21 @@ const compile = () => {
   gulp.parallel('bs_sass')();
 }
 
+const dirs = [path.join(projectDir, '/assets/**/*.scss'), path.join(projectDir, '/templates/**/*.scss')];
+
 module.exports = () => {
   // 通过BS监测sass文件执行编译
-  browserSync.watch(path.join(projectDir, '/**/*.scss')).on('change', async (dir) => {
-    utils.logChanged(dir, projectDir);
-    compile();
-  }).on('add', (dir) => {
-    (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
-  }).on('unlink', (dir) => {
-    del([path.join(src, '/css/**/*')]).then(() => {
+  dirs.map(v => {
+    browserSync.watch(v).on('change', async (dir) => {
       utils.logChanged(dir, projectDir);
       compile();
+    }).on('add', (dir) => {
+      (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
+    }).on('unlink', (dir) => {
+      del([path.join(src, '/css/**/*')]).then(() => {
+        utils.logChanged(dir, projectDir);
+        compile();
+      });
     });
   });
 }
