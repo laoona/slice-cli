@@ -10,9 +10,9 @@ const gulp = require('gulp');
 const debug = require('gulp-debug');
 const gutil = require('gulp-util');
 
-const src = '/assets';
+const src = '/src/assets';
 const projectDir = process.cwd();
-const buildDir = path.join(projectDir, '/dist/', src, '/js');
+const buildDir = path.join(projectDir, '/dist/', '/assets/js');
 
 module.exports = () => {
   return gulp.src(projectDir + src + '/js/**/*')

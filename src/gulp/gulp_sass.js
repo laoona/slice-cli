@@ -16,9 +16,9 @@ const browserSync = require("browser-sync").get('slice-server');
 const projectDir = process.cwd();
 const utils = require('../utils');
 
-const src = '/assets';
+const src = '/src/assets';
 const sassDir = path.join(projectDir, src, '/sass/**/*.scss');
-const distCssDir = path.join(projectDir, src, '/css');
+const distCssDir = path.join(projectDir, '/dist/assets', '/css');
 
 let imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
 
@@ -30,7 +30,8 @@ module.exports = function () {
     .pipe(gulp.dest(distCssDir))
 
     .pipe(replace(new RegExp(imgPattern, 'g'), function (match, __absolutePath__) {
-      const __path = path.relative(path.dirname(__absolutePath__), projectDir + src + '/images');
+      // const __path = path.relative(path.dirname(__absolutePath__), projectDir + src + '/images');
+      const __path = path.relative(path.dirname(__absolutePath__), projectDir + '/dist/assets' + '/images');
 
       return utils.fixedWinPath(__path);
     }))

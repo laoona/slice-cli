@@ -36,7 +36,7 @@ module.exports = (config) => {
   // browser-sync的配置
   const bsOptions = {
     server: {
-      baseDir: projectDir,
+      baseDir: path.join(projectDir, './dist'),
       directory: true,
       routes: {
         '/lib': path.join(projectDir, './../lib')

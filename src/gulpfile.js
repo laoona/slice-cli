@@ -54,7 +54,7 @@ module.exports = function (command = 'run', opts = {}) {
     templateDataDir: smartyConf.templateDataDir || projectDir,
     dataManifest: smartyConf.dataManifest || {},
     constPath: smartyConf.constPath,
-    rootDir: smartyConf.rootDir ? path.resolve(projectDir, smartyConf.rootDir) : path.join(projectDir, '/templates/../../')
+    rootDir: smartyConf.rootDir ? path.resolve(projectDir, smartyConf.rootDir) : path.join(projectDir, '/views/../../')
   };
 
   // server
@@ -74,7 +74,7 @@ module.exports = function (command = 'run', opts = {}) {
 
   // copy templates目录
   gulp.task('build:templates', () => {
-    return gulp.src(path.join(projectDir, '/templates/**/*'), {cwdbase: true})
+    return gulp.src(path.join(projectDir, '/views/**/*'), {cwdbase: true})
       .pipe(gulp.dest(path.join(projectDir, "/dist")));
   });
 
@@ -89,11 +89,6 @@ module.exports = function (command = 'run', opts = {}) {
     await del(['./dist/**']);
   });
 
-  // 清理run目录
-  gulp.task('clean:run', async () => {
-    await del(['./pages/**', './assets/css/**']);
-  });
-
   // 清理样式引用的图片
   gulp.task('clean:image', () => gulpCleanImages('', command, date));
 
@@ -105,11 +100,12 @@ module.exports = function (command = 'run', opts = {}) {
 
   // build-sprite-fixed 任务
   gulp.task('build:sprite:fixed', async () => {
-    await buildSpriteFixed()
+    await buildSpriteFixed();
     const projectDir = process.cwd();
-    const buildDir = path.join(projectDir, '/dist');
+    const buildDir = path.join(projectDir, '/dist/assets/css/src');
+    const assetsSrcCss = path.join(projectDir, '/src/assets/css');
 
-    del([buildDir], {force: true});
+    await del([buildDir, assetsSrcCss], {force: true});
   });
 
   // build-fonts 任务
@@ -122,11 +118,11 @@ module.exports = function (command = 'run', opts = {}) {
   const tasks = ['clean', 'clone'];
 
   if (command === 'run') {
-    tasks.push(...['clean:run', 'compile:sass', 'compile:smarty', 'server']);
+    tasks.push(...['compile:sass', 'compile:smarty', 'server']);
   }
 
   if(command === 'build') {
-    tasks.push(...['build:images', parallel('build:templates', 'build:fonts', 'build:js'), 'build:smarty', 'build:sass', 'build:sprite', 'clean:image']);
+    tasks.push(...['build:images', parallel('build:templates', 'build:fonts', 'build:js'), 'build:smarty', 'build:sass', 'build:sprite', 'build:sprite:fixed', 'clean:image']);
     opts.zip && tasks.push('build:zip');
   }
 

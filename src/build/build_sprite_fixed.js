@@ -10,13 +10,14 @@ const gulp = require('gulp');
 const path = require('path');
 
 const projectDir = process.cwd();
-const src = '/assets';
 const buildDir = path.join(projectDir, '/dist');
 
 module.exports = () => {
-
-  const pathFixed = path.normalize(buildDir + './' + '' + src + '/css/**/*.css');
-
-  return gulp.src(pathFixed)
-    .pipe(gulp.dest(buildDir + src + '/css'))
+  const pathFixed = path.normalize(path.join((buildDir + '/assets/css/src/assets/css/**/*.css')));
+  return new Promise(resolve => {
+      gulp.src(pathFixed)
+        .pipe(gulp.dest(buildDir + '/assets' + '/css'))
+        .on('end', resolve);
+    }
+  );
 }

@@ -15,12 +15,12 @@ const gulpSmarty = require('../gulp/gulp_smarty');
 const utils = require('../utils');
 
 const projectDir = process.cwd();
-const tplDir = path.join(projectDir, './templates');
-const src = path.join(projectDir);
+const tplDir = path.join(projectDir, './src/views');
+const src = path.join(projectDir, './');
 
 const compile = (config) => {
   gulp.task('bs_smarty', async () => {
-    await gulpSmarty(config);
+    await gulpSmarty(config)
 
     browserSync.reload();
   });
@@ -37,7 +37,7 @@ module.exports = (config) => {
     (arguments.length == 1) && (compile(config), utils.logChanged(dir, projectDir));
   }).on('unlink', dir => {
 
-    del([src + '/pages/**/*']).then(function () {
+    del([path.join(projectDir, './dist') + '/views/**/*']).then(function () {
       utils.logChanged(dir, projectDir);
       compile(config);
     });
@@ -51,7 +51,15 @@ module.exports = (config) => {
 
   }
 
-  browserSync.watch(path.join(projectDir, '/data/**/*.json')).on('change', function (dir) {
+  console.log(constPath, src, config.smarty.constPath);
+
+  browserSync.watch(path.join(projectDir, './data/**/*.json')).on('change', function (dir) {
+    utils.logChanged(dir, projectDir);
+    compile(config);
+  }).on('add', (dir) => {
+    utils.logChanged(dir, projectDir);
+    compile(config);
+  }).on('unlink', (dir) => {
     utils.logChanged(dir, projectDir);
     compile(config);
   });

@@ -19,7 +19,7 @@ const tinypng = require('gulp-tinypng-nokey-plus');
 const utils = require('../utils');
 
 const projectDir = process.cwd();
-const src = '/assets';
+const src = '/src/assets';
 
 module.exports = (opts, config = {}) => {
   const imagesFilter = filter(['**/*.png', '**/*.jpg', '**/*.jpeg', '!**/__*.png', '!**/demo/*.*'], {restore: true});
@@ -41,5 +41,5 @@ module.exports = (opts, config = {}) => {
     .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
     .pipe(imagesFilter.restore)
     .pipe(ignore.exclude(isFilterPreName))
-    .pipe(gulp.dest(buildDir + src + '/images'))
+    .pipe(gulp.dest(buildDir + '/assets' + '/images'))
 }

@@ -23,7 +23,7 @@ const merge = require('lodash/merge');
 const utils = require('../utils');
 
 const projectDir = process.cwd();
-const src = '/assets';
+const src = '/src/assets';
 
 module.exports = (opts, config = {}) => {
   const useTinypng = config.tinypng || false;
@@ -40,11 +40,11 @@ module.exports = (opts, config = {}) => {
     // 各图片间间距，如果设置为奇数，会强制+1以保证生成的2x图片为偶数宽高，默认 0
     padding: 20,
     // sprite背景图源文件夹，只有匹配此路径才会处理，默认 images
-    imagepath: spriteDir || path.join('', './', src, '/images/slice'),
+    imagepath: spriteDir || path.join('./', src, '/images/slice'),
     // 映射CSS中背景路径，支持函数和数组，默认为 null
     imagepath_map: null,
     // 雪碧图输出目录，注意，会覆盖之前文件！默认 images/
-    spritedest: path.normalize('./' + src + '/images/'),
+    spritedest: path.normalize('../images'),
     // 替换后的背景路径，默认 ../images/
     spritepath: path.normalize('../' + '' + '/images/')
   };
@@ -65,7 +65,7 @@ module.exports = (opts, config = {}) => {
 
     .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
     .pipe(imagesFilter.restore)
-    .pipe(gulp.dest(buildDir))
+    .pipe(gulp.dest(path.join(buildDir, './assets/css')))
     .pipe(ignore.exclude(isFilterCss))
-    .pipe(gulp.dest(buildDir))
+    .pipe(gulp.dest(path.join(buildDir, './assets/css')))
 }

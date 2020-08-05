@@ -7,7 +7,7 @@
  */
 
 const path = require('path');
-const src = path.join(process.cwd(), './assets');
+const src = path.join(process.cwd(), './src/assets');
 
 const jsDir = src + '/js/**/*.js';
 const imagesDir = src + '/images/**/*.*';

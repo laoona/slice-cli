@@ -13,19 +13,22 @@ const path = require('path');
 const {log} = require('../lib/index');
 
 const projectDir = process.cwd();
-const baseDir = path.join(projectDir, './templates');
+const baseDir = path.join(projectDir, './src/views');
 
 const srcFiles = path.join(baseDir, './**/*.tpl');
-const distDir = path.join(projectDir, '/pages');
+const distDir = path.join(projectDir, './dist/views');
 
 module.exports = (config = {}) => {
   const smarty4jsConf = config.smarty4jsConf || {};
 
-  return gulp.src([srcFiles])
-    .pipe(smarty4js(smarty4jsConf))
-    .on('error', function (error) {
-      log.error(error.message);
-      this.end();
-    })
-    .pipe(gulp.dest(distDir));
+  return new Promise((resolve => {
+    gulp.src([srcFiles])
+      .pipe(smarty4js(smarty4jsConf))
+      .on('error', function (error) {
+        log.error(error.message);
+        this.end();
+      })
+      .pipe(gulp.dest(distDir))
+      .on('end', resolve);
+  }));
 }

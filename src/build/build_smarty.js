@@ -24,7 +24,7 @@ const buildDir = path.join(projectDir, '/dist');
 
 module.exports = (config) => {
   let isFilterPreName = utils.isFilterPreName;
-  let src = path.join(projectDir, '/assets');
+  let src = path.join(projectDir, '/src/assets');
   let imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
 
   const smarty4jsConf = config.smarty4jsConf || {};
@@ -42,7 +42,7 @@ module.exports = (config) => {
     "eol": "\n"
   };
 
-  return gulp.src([path.join(projectDir, '/templates/**/*.tpl')])
+  return gulp.src([path.join(projectDir, '/src/views/**/*.tpl')])
     .pipe(debug({title: 'SLICE-HTML: ' + gutil.colors.green('✔')}))
     .pipe(ignore.exclude(isFilterPreName))
     .pipe(smarty4js(smarty4jsConf))
@@ -55,8 +55,8 @@ module.exports = (config) => {
 
       return utils.fixedWinPath(__path);
     }))
-    .pipe(gulp.dest(projectDir + '/pages'))
-    .pipe(gulp.dest(buildDir + '/pages'))
+    // .pipe(gulp.dest(projectDir + '/src/pages'))
+    .pipe(gulp.dest(buildDir + '/views'))
     .pipe(tobase64(tobase64Cfg))
     .pipe(inlinesource(inlinesourceConf))
     .pipe(replace(/:\s*url\([\"|\']{1}(.*)[\"|\']{1}\)/gi, ':url($1)'))
@@ -66,5 +66,5 @@ module.exports = (config) => {
       return ':url(' + utils.fixedWinPath(__path);
     }))
     .pipe(htmlBeautify(htmlBeautifyConf))
-    .pipe(gulp.dest(buildDir + '/pages'))
+    .pipe(gulp.dest(buildDir + '/views'))
 }

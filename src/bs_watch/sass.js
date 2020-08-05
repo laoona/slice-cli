@@ -15,14 +15,14 @@ const gulpSass = require('../gulp/gulp_sass');
 const utils = require('../utils');
 
 const projectDir = process.cwd();
-const src = path.join(projectDir, './assets');
+const src = path.join(projectDir, './dist/assets');
 
 const compile = () => {
   gulp.task('bs_sass', () => gulpSass());
   gulp.parallel('bs_sass')();
 }
 
-const dirs = [path.join(projectDir, '/assets/**/*.scss'), path.join(projectDir, '/templates/**/*.scss')];
+const dirs = [path.join(projectDir, '/src/assets/**/*.scss'), path.join(projectDir, '/src/views/**/*.scss')];
 
 module.exports = () => {
   // 通过BS监测sass文件执行编译

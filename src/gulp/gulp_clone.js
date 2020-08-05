@@ -11,7 +11,7 @@ const debug = require('gulp-debug');
 const filter = require('gulp-filter');
 
 module.exports = function() {
-  const f = filter(['src/**/*.*', '!src/**/*.tpl'] )
+  const f = filter(['src/**/*.*', '!src/**/*.tpl', '!src/**/*.scss'] )
   return gulp.src(['src/**'])
     .pipe(f)
     .pipe(debug({title: 'clone'}))
