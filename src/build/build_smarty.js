@@ -30,7 +30,7 @@ module.exports = (config) => {
   const smarty4jsConf = config.smarty4jsConf || {};
 
   const tobase64Cfg = {
-    maxsize: 100,
+    maxsize: 1000,
   };
   const inlinesourceConf = {
     compress: false
@@ -61,7 +61,7 @@ module.exports = (config) => {
     .pipe(inlinesource(inlinesourceConf))
     .pipe(replace(/:\s*url\([\"|\']{1}(.*)[\"|\']{1}\)/gi, ':url($1)'))
     .pipe(replace(/:\s*url\(\.\.\/images/gi, function (match, __absolutePath__) {
-      const __path = path.relative(path.dirname(__absolutePath__), buildDir + src + '/images');
+      const __path = path.relative(path.dirname(__absolutePath__), buildDir + '/assets' + '/images');
 
       return ':url(' + utils.fixedWinPath(__path);
     }))
