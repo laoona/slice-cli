@@ -51,8 +51,6 @@ module.exports = (config) => {
 
   }
 
-  console.log(constPath, src, config.smarty.constPath);
-
   browserSync.watch(path.join(projectDir, './data/**/*.json')).on('change', function (dir) {
     utils.logChanged(dir, projectDir);
     compile(config);
