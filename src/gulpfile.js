@@ -105,7 +105,7 @@ module.exports = function (command = 'run', opts = {}) {
     const buildDir = path.join(projectDir, '/dist/assets/css/src');
     const assetsSrcCss = path.join(projectDir, '/src/assets/css');
 
-    // await del([buildDir, assetsSrcCss], {force: true});
+    await del([buildDir, assetsSrcCss], {force: true});
   });
 
   // build-fonts 任务
