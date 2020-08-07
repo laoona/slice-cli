@@ -15,6 +15,7 @@ const gulpSass = require('./gulp/gulp_sass');
 const gulpClone = require('./gulp/gulp_clone');
 const gulpSmarty = require('./gulp/gulp_smarty');
 const gulpCleanImages = require('./gulp/gulp_clean_images');
+const gulpScript = require('./gulp/gulp_script');
 
 const buildSmarty = require('./build/build_smarty');
 const buildZip = require('./build/build_zip');
@@ -69,6 +70,9 @@ module.exports = function (command = 'run', opts = {}) {
   // 编译smarty文件
   gulp.task('compile:smarty', () => gulpSmarty(config));
 
+  // 编译js文件
+  gulp.task('compile:script', () => gulpScript());
+
   // 构建smarty文件
   gulp.task('build:smarty', () => buildSmarty(config));
 
@@ -110,15 +114,15 @@ module.exports = function (command = 'run', opts = {}) {
 
   // build-fonts 任务
   gulp.task('build:fonts', () => buildFonts(opts, config));
-  // build-js 任务
 
+  // build-js 任务
   gulp.task('build:js', () => buildJs(opts, config));
 
   // task列表
   const tasks = ['clean', 'clone'];
 
   if (command === 'run') {
-    tasks.push(...['compile:sass', 'compile:smarty', 'server']);
+    tasks.push(...[parallel('compile:sass', 'compile:smarty', 'compile:script'), 'server']);
   }
 
   if(command === 'build') {

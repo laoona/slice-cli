@@ -16,6 +16,8 @@ const fontsDir = src + '/fonts/**/*.*';
 const filesDir = src + '/files/**/*.*';
 const dirs = [jsDir, imagesDir, fontsDir, filesDir];
 
+dirs.shift();
+
 const browserSync = require('browser-sync').get('slice-server');
 const gulp = require('gulp');
 const utils = require('../utils');

@@ -13,6 +13,7 @@ const {createProxyMiddleware} = require('http-proxy-middleware');
 const bsSass = require('../bs_watch/sass');
 const bsSmarty = require('../bs_watch/smarty');
 const bsOthers = require('../bs_watch/others');
+const bsScript = require('../bs_watch/script');
 
 
 const projectDir = process.cwd();
@@ -50,10 +51,8 @@ module.exports = (config) => {
     notify: false,
     ghostMode: false,
     open: 'external',
-/*
-    logPrefix: 'SLICE',
-    logFileChanges: false,
-*/
+    logPrefix: 'BS',
+    // logFileChanges: false,
     middleware: [...jsonPlaceholderProxy,
       function (req, res, next) {
         res.setHeader('Expires', '0');
@@ -71,6 +70,9 @@ module.exports = (config) => {
 
   // bs监听smarty
   bsSmarty(config);
+
+  // bs监听JS文件
+  bsScript();
 
   // bs监听其它文件
   bsOthers();
