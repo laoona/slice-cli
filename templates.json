@@ -2,11 +2,11 @@
     "tpl": {
         "touch": {
             "url": "https://github.com/laoono/slice.git",
-            "branch": "touch"
+            "branch": "touch_src"
         },
         "pc": {
             "url": "https://github.com/laoono/slice.git",
-            "branch": "pc"
+            "branch": "pc_src"
         }
     },
     "config": "../config.js"
