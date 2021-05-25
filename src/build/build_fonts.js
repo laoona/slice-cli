@@ -8,7 +8,7 @@
 const path = require('path');
 const gulp = require('gulp');
 const debug = require('gulp-debug');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 
 const src = '/src/assets';
 const projectDir = process.cwd();
@@ -16,6 +16,6 @@ const buildDir = path.join(projectDir, '/dist/fonts');
 
 module.exports = () => {
   return gulp.src(projectDir + src + '/fonts/**/*')
-    .pipe(debug({title: 'SLICE-FONTS: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-FONTS: ' + gUtil.colors.green('✔')}))
     .pipe(gulp.dest(buildDir));
 }

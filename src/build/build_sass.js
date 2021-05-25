@@ -8,7 +8,7 @@
 const gulp = require('gulp');
 const path = require('path');
 const debug = require('gulp-debug');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const replace = require('gulp-replace-path');
@@ -31,7 +31,7 @@ module.exports = (opts, config) => {
   const imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
 
   return gulp.src([sassDir, tplDirRoot + '*.scss'])
-    .pipe(debug({title: 'SLICE-CSS: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-CSS: ' + gUtil.colors.green('✔')}))
     .pipe(sass({outputStyle: outputStyle}).on('error', sass.logError))
     .pipe(autoprefixer(autoprefixerCfg))
     .pipe(gulp.dest(buildDir + '/assets' + '/css'))

@@ -8,7 +8,7 @@
 const path = require('path');
 const gulp = require('gulp');
 const debug = require('gulp-debug');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 
 const src = '/src/assets';
 const projectDir = process.cwd();
@@ -16,6 +16,6 @@ const buildDir = path.join(projectDir, '/dist/', '/assets/js');
 
 module.exports = () => {
   return gulp.src(projectDir + src + '/js/**/*')
-    .pipe(debug({title: 'SLICE-JS: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-JS: ' + gUtil.colors.green('✔')}))
     .pipe(gulp.dest(buildDir));
 }

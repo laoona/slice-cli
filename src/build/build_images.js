@@ -10,7 +10,7 @@ const gulp = require('gulp');
 const filter = require('gulp-filter');
 const path = require('path');
 const debug = require('gulp-debug');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 const gulpIf = require('gulp-if');
 const ignore = require('gulp-ignore');
 const imagemin = require('gulp-imagemin');
@@ -24,7 +24,7 @@ const src = '/src/assets';
 module.exports = (opts, config = {}) => {
   const imagesFilter = filter(['**/*.png', '**/*.jpg', '**/*.jpeg', '!**/__*.png', '!**/demo/*.*'], {restore: true});
   const isFilterPreName = utils.isFilterPreName;
-  const useTinypng = config.tinypng || false;
+  const useTinyPng = config.tinypng || false;
 
   const buildDir = path.join(projectDir, '/dist');
 
@@ -34,11 +34,11 @@ module.exports = (opts, config = {}) => {
   }
 
   return gulp.src(projectDir + src + '/images/**')
-    .pipe(debug({title: 'SLICE-IMAGES: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-IMAGES: ' + gUtil.colors.green('✔')}))
     .pipe(imagesFilter)
-    .pipe(gulpIf(((opts.isIm) && !useTinypng), imagemin()))
+    .pipe(gulpIf(((opts.isIm) && !useTinyPng), imagemin()))
     .on('error', handleError)
-    .pipe(gulpIf(((opts.isIm) && useTinypng), tinypng()))
+    .pipe(gulpIf(((opts.isIm) && useTinyPng), tinypng()))
     .pipe(imagesFilter.restore)
     .pipe(ignore.exclude(isFilterPreName))
     .pipe(gulp.dest(buildDir + '/assets' + '/images'))

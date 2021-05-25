@@ -9,12 +9,12 @@
 const gulp = require('gulp');
 const path = require('path');
 const debug = require('gulp-debug');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 const ignore = require('gulp-ignore');
 const smarty4js = require('gulp-smarty4js-render');
 const replace = require('gulp-replace-path');
-const tobase64 = require('gulp-img-base64');
-const inlinesource = require('gulp-inline-source');
+const toBase64 = require('gulp-img-base64');
+const inlineSource = require('gulp-inline-source');
 const htmlBeautify = require('gulp-html-beautify');
 
 const utils = require('../utils');
@@ -29,10 +29,10 @@ module.exports = (config) => {
 
   const smarty4jsConf = config.smarty4jsConf || {};
 
-  const tobase64Cfg = {
+  const toBase64Cfg = {
     maxsize: 1000,
   };
-  const inlinesourceConf = {
+  const inlineSourceConf = {
     compress: false
   };
 
@@ -43,11 +43,11 @@ module.exports = (config) => {
   };
 
   return gulp.src([path.join(projectDir, '/src/views/**/*.tpl')])
-    .pipe(debug({title: 'SLICE-HTML: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-HTML: ' + gUtil.colors.green('✔')}))
     .pipe(ignore.exclude(isFilterPreName))
     .pipe(smarty4js(smarty4jsConf))
     .on('error', function (error) {
-      gutil.log(gutil.colors.magenta('ERROR: '), error.message);
+      gUtil.log(gUtil.colors.magenta('ERROR: '), error.message);
       this.end();
     })
     .pipe(replace(new RegExp(imgPattern, 'g'), function (match, __absolutePath__) {
@@ -57,8 +57,8 @@ module.exports = (config) => {
     }))
     // .pipe(gulp.dest(projectDir + '/src/pages'))
     .pipe(gulp.dest(buildDir + '/views'))
-    .pipe(tobase64(tobase64Cfg))
-    .pipe(inlinesource(inlinesourceConf))
+    .pipe(toBase64(toBase64Cfg))
+    .pipe(inlineSource(inlineSourceConf))
     .pipe(replace(/:\s*url\([\"|\']{1}(.*)[\"|\']{1}\)/gi, ':url($1)'))
     .pipe(replace(/:\s*url\(\.\.\/images/gi, function (match, __absolutePath__) {
       const __path = path.relative(path.dirname(__absolutePath__), buildDir + '/assets' + '/images');

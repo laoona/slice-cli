@@ -16,7 +16,7 @@ const tinypng = require('gulp-tinypng-nokey-plus');
 const imagemin = require('gulp-imagemin');
 const filter = require('gulp-filter');
 const path = require('path');
-const gutil = require('gulp-util');
+const gUtil = require('gulp-util');
 const merge = require('lodash/merge');
 
 
@@ -26,7 +26,7 @@ const projectDir = process.cwd();
 const src = '/src/assets';
 
 module.exports = (opts, config = {}) => {
-  const useTinypng = config.tinypng || false;
+  const useTinyPng = config.tinypng || false;
   const imagesFilter = filter(['**/*.png', '**/*.jpg', '**/*.jpeg', '!**/__*.png', '!**/demo/*.*'], {restore: true});
 
   const buildDir = path.join(projectDir, '/dist');
@@ -58,12 +58,12 @@ module.exports = (opts, config = {}) => {
 
   return gulp.src(projectDir + src + '/css/**/*.css')
     .pipe(spritesmith(spritesmithConf))
-    .pipe(debug({title: 'SLICE-SPRITE-CSS-IMAGES: ' + gutil.colors.green('✔')}))
+    .pipe(debug({title: 'SLICE-SPRITE-CSS-IMAGES: ' + gUtil.colors.green('✔')}))
     .pipe(imagesFilter)
-    .pipe(gulpIf(((opts.isIm) && !useTinypng), imagemin()))
+    .pipe(gulpIf(((opts.isIm) && !useTinyPng), imagemin()))
     .on('error', handleError)
 
-    .pipe(gulpIf(((opts.isIm) && useTinypng), tinypng()))
+    .pipe(gulpIf(((opts.isIm) && useTinyPng), tinypng()))
     .pipe(imagesFilter.restore)
     .pipe(gulp.dest(path.join(buildDir, './assets/css')))
     .pipe(ignore.exclude(isFilterCss))
