@@ -7,7 +7,7 @@
  */
 
 const gulp = require('gulp');
-const gulpif = require('gulp-if');
+const gulpIf = require('gulp-if');
 const ignore = require('gulp-ignore');
 
 const debug = require('gulp-debug');
@@ -60,10 +60,10 @@ module.exports = (opts, config = {}) => {
     .pipe(spritesmith(spritesmithConf))
     .pipe(debug({title: 'SLICE-SPRITE-CSS-IMAGES: ' + gutil.colors.green('✔')}))
     .pipe(imagesFilter)
-    .pipe(gulpif(((opts.isIm) && !useTinypng), imagemin()))
+    .pipe(gulpIf(((opts.isIm) && !useTinypng), imagemin()))
     .on('error', handleError)
 
-    .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
+    .pipe(gulpIf(((opts.isIm) && useTinypng), tinypng()))
     .pipe(imagesFilter.restore)
     .pipe(gulp.dest(path.join(buildDir, './assets/css')))
     .pipe(ignore.exclude(isFilterCss))

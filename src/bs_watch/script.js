@@ -17,25 +17,25 @@ const utils = require('../utils');
 const projectDir = process.cwd();
 const src = path.join(projectDir, './dist/assets');
 
-const compile = () => {
-  gulp.task('bs_script', () => gulpScript());
+const compile = (config = {}) => {
+  gulp.task('bs_script', () => gulpScript(config));
   gulp.parallel('bs_script')();
 }
 
 const dirs = [path.join(projectDir, '/src/assets/**/*.js'), path.join(projectDir, '/src/views/**/*.js')];
 
-module.exports = () => {
+module.exports = (config) => {
   // 通过BS监测sass文件执行编译
   dirs.map(v => {
     browserSync.watch(v).on('change', async (dir) => {
       utils.logChanged(dir, projectDir);
-      compile();
+      compile(config);
     }).on('add', (dir) => {
       (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
     }).on('unlink', (dir) => {
       del([path.join(src, '/js/**/*')]).then(() => {
         utils.logChanged(dir, projectDir);
-        compile();
+        compile(config);
       });
     });
   });

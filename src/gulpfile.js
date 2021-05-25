@@ -71,7 +71,7 @@ module.exports = function (command = 'run', opts = {}) {
   gulp.task('compile:smarty', () => gulpSmarty(config));
 
   // 编译js文件
-  gulp.task('compile:script', () => gulpScript());
+  gulp.task('compile:script', () => gulpScript(config));
 
   // 构建smarty文件
   gulp.task('build:smarty', () => buildSmarty(config));

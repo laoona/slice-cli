@@ -33,7 +33,8 @@ const config = {
         spritestamp: false
         // 在CSS文件末尾追加时间戳，默认不追加
         // cssstamp: false
-    }
+    },
+    babel: true,
 };
 
 module.exports = config;

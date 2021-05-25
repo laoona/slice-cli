@@ -72,7 +72,7 @@ module.exports = (config) => {
   bsSmarty(config);
 
   // bs监听JS文件
-  bsScript();
+  bsScript(config);
 
   // bs监听其它文件
   bsOthers();

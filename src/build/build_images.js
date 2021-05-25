@@ -11,7 +11,7 @@ const filter = require('gulp-filter');
 const path = require('path');
 const debug = require('gulp-debug');
 const gutil = require('gulp-util');
-const gulpif = require('gulp-if');
+const gulpIf = require('gulp-if');
 const ignore = require('gulp-ignore');
 const imagemin = require('gulp-imagemin');
 const tinypng = require('gulp-tinypng-nokey-plus');
@@ -36,9 +36,9 @@ module.exports = (opts, config = {}) => {
   return gulp.src(projectDir + src + '/images/**')
     .pipe(debug({title: 'SLICE-IMAGES: ' + gutil.colors.green('✔')}))
     .pipe(imagesFilter)
-    .pipe(gulpif(((opts.isIm) && !useTinypng), imagemin()))
+    .pipe(gulpIf(((opts.isIm) && !useTinypng), imagemin()))
     .on('error', handleError)
-    .pipe(gulpif(((opts.isIm) && useTinypng), tinypng()))
+    .pipe(gulpIf(((opts.isIm) && useTinypng), tinypng()))
     .pipe(imagesFilter.restore)
     .pipe(ignore.exclude(isFilterPreName))
     .pipe(gulp.dest(buildDir + '/assets' + '/images'))

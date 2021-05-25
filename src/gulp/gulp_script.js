@@ -12,6 +12,7 @@ const path = require('path');
 const browserSync = require("browser-sync").get('slice-server');
 const babel = require('gulp-babel');
 const cached = require('gulp-cached');
+const gulpIf = require('gulp-if');
 
 const {log} = require('../lib/index');
 
@@ -26,10 +27,10 @@ function handleError(error) {
   this.emit('end');
 }
 
-module.exports = function () {
+module.exports = function (config = {}) {
   return gulp.src([dir])
     .pipe(sourcemaps.init())
-    .pipe(babel({
+    .pipe(gulpIf(config.babel, babel({
       presets: [
         [
           "@babel/preset-env",
@@ -46,13 +47,15 @@ module.exports = function () {
         ]
       ],
       plugins: [
+        ['@babel/plugin-proposal-optional-chaining',],
+        ['@babel/plugin-proposal-nullish-coalescing-operator'],
         ['transform-es2015-modules-amd'],
         ['@babel/transform-runtime', {
           helpers: false,
           regenerator:true,
         }]
       ],
-    }))
+    })))
     .on('error', handleError)
     .pipe(cached('#script'))
     .pipe(sourcemaps.write('./.maps'))
