@@ -15,7 +15,8 @@ const gulpScript = require('../gulp/gulp_script');
 const utils = require('../utils');
 
 const projectDir = process.cwd();
-const src = path.join(projectDir, './dist/assets');
+const src = path.join(projectDir, './src');
+const dist = path.join(projectDir, './dist');
 
 const compile = (config = {}) => {
   gulp.task('bs_script', () => gulpScript(config));
@@ -30,10 +31,12 @@ module.exports = (config) => {
     browserSync.watch(v).on('change', async (dir) => {
       utils.logChanged(dir, projectDir);
       compile(config);
-    }).on('add', (dir) => {
-      (arguments.length == 1) && (compile(), utils.logChanged(dir, projectDir));
+    }).on('add', function (dir) {
+      (arguments.length === 1) && (compile(config), utils.logChanged(dir, projectDir));
     }).on('unlink', (dir) => {
-      del([path.join(src, '/js/**/*')]).then(() => {
+      const delPath = path.join(dist, dir.replace(src, ''));
+
+      del([delPath]).then(() => {
         utils.logChanged(dir, projectDir);
         compile(config);
       });

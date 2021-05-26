@@ -13,6 +13,7 @@ const browserSync = require("browser-sync").get('slice-server');
 const babel = require('gulp-babel');
 const cached = require('gulp-cached');
 const gulpIf = require('gulp-if');
+const filter = require('gulp-filter');
 
 const {log} = require('../lib/index');
 
@@ -28,7 +29,10 @@ function handleError(error) {
 }
 
 module.exports = function (config = {}) {
+  const filterScript = filter(['**/*.js', '!**/__*__.js',], {restore: true});
+
   return gulp.src([dir])
+    .pipe(filterScript)
     .pipe(sourcemaps.init())
     .pipe(gulpIf(config.babel, babel({
       presets: [
