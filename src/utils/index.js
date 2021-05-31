@@ -66,6 +66,15 @@ const Utils = {
     return flag;
   },
 
+  isFilterFileName (file) {
+    const src = file.path;
+    const fileName = path.basename(src);
+    const extname = path.extname(src);
+    const reg = new RegExp(`\\${extname}$`);
+
+    return /^_{2}.+_{2}$/gi.test(fileName.replace(reg, ''));
+  },
+
   /**
    * 过滤文类类型是css的文件
    * @param file
