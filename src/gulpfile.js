@@ -116,7 +116,7 @@ module.exports = function (command = 'run', opts = {}) {
   gulp.task('build:fonts', () => buildFonts(opts, config));
 
   // build-js 任务
-  gulp.task('build:js', () => buildJs(opts, config));
+  gulp.task('build:js', () => buildJs({...config, command}));
 
   // task列表
   const tasks = ['clean', 'clone'];

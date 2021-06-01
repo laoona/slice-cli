@@ -33,34 +33,12 @@ module.exports = function (config = {}) {
   const condition = (file) => {
     return config.babel && !utils.isFilterFileName(file);
   };
+  const babelCfg = config.babel || {};
 
   return gulp.src([dir])
     .pipe(sourcemaps.init())
     .pipe(gulpIf(condition, babel({
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            targets: {
-              browsers: [
-                'last 3 versions',
-                'Android >= 4.1',
-                'ios >= 8',
-                'ie 9',
-              ],
-            },
-          }
-        ]
-      ],
-      plugins: [
-        ['@babel/plugin-proposal-optional-chaining',],
-        ['@babel/plugin-proposal-nullish-coalescing-operator'],
-        ['transform-es2015-modules-amd'],
-        ['@babel/transform-runtime', {
-          helpers: false,
-          regenerator:true,
-        }]
-      ],
+      ...babelCfg,
     })))
     .on('error', handleError)
     .pipe(cached('#script'))
