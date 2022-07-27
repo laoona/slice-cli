@@ -1,13 +1,13 @@
 [
   {
     "name": "h5",
-    "url": "https://github.com/laoono/slice.git",
+    "url": "https://github.com/laoona/slice.git",
     "branch": "touch_src",
     "desc": "h5通用模板"
   },
   {
     "name": "pc",
-    "url": "https://github.com/laoono/slice.git",
+    "url": "https://github.com/laoona/slice.git",
     "branch": "pc_src",
     "desc": "pc通用模板"
   }
