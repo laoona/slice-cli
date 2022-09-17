@@ -52,12 +52,12 @@
     "smaryt",
     "slice"
   ],
-  "author": "laoono@163.com",
+  "author": "laoona@163.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/laoono/slice-cli/issues"
+    "url": "https://github.com/laoona/slice-cli/issues"
   },
-  "homepage": "https://github.com/laoono/slice-cli#readme",
+  "homepage": "https://github.com/laoona/slice-cli#readme",
   "bin": {
     "slice": "index.js"
   }
