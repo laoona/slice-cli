@@ -9,7 +9,7 @@
 const gulp = require('gulp');
 const replace = require('gulp-replace-path');
 const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const path = require('path');
 const browserSync = require("browser-sync").get('slice-server');
 

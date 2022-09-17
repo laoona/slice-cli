@@ -26,7 +26,7 @@
     "gulp-img-base64": "0.0.1",
     "gulp-inline-source": "^4.0.0",
     "gulp-replace-path": "^0.4.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-slice-sprite": "0.0.3",
     "gulp-smarty4js-render": "^0.1.9",
     "gulp-sourcemaps": "^2.6.5",
@@ -37,10 +37,10 @@
     "inquirer": "^7.3.3",
     "lodash": "^4.17.19",
     "ora": "^4.0.5",
+    "sass": "^1.54.9",
     "then-request": "^6.0.2",
     "through2": "^4.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
