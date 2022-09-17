@@ -18,7 +18,7 @@ const askProjectName = function (conf = {}, prompts) {
       type: 'input',
       name: 'projectName',
       message: '请输入项目名称！',
-      validate (input) {
+      validate(input) {
         if (!input.trim()) {
           return '项目名不能为空！'
         }
@@ -33,7 +33,7 @@ const askProjectName = function (conf = {}, prompts) {
       type: 'input',
       name: 'projectName',
       message: '当前目录已经存在同名项目，请换一个项目名！',
-      validate (input) {
+      validate(input) {
         if (!input.trim()) {
           return '项目名不能为空！'
         }
@@ -46,8 +46,8 @@ const askProjectName = function (conf = {}, prompts) {
   }
 }
 
-const askTemplate =  function (conf, prompts, list = []) {
-  const choices = [...list.map(({desc: name, name: value}) => ({ name, value}))]
+const askTemplate = function (conf, prompts, list = []) {
+  const choices = [...list.map(({desc: name, name: value}) => ({name, value}))]
 
   if (typeof conf.template !== 'string') {
     prompts.push({
@@ -59,12 +59,29 @@ const askTemplate =  function (conf, prompts, list = []) {
   }
 }
 
+const askGitRemote = function (conf, prompts) {
+  const choices = [
+    {name: 'GitHub', value: 1},
+    {name: 'Gitee', value: 2}
+  ];
+
+  if (typeof conf.template !== 'string') {
+    prompts.push({
+      type: 'list',
+      name: 'remote',
+      message: '请选择模板源',
+      choices
+    })
+  }
+}
+
 module.exports = function () {
 
   const config = {};
 
   askProjectName(config, promptList)
   askTemplate(config, promptList, templates)
+  askGitRemote(config, promptList)
 
   inquirer
     .prompt(promptList)

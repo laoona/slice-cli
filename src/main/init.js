@@ -13,7 +13,7 @@ const platform = os.platform();
 const chalk = require('chalk');
 const templates = require('../templates');
 
-module.exports = function({projectName, template}) {
+module.exports = function({projectName, template, remote}) {
   let tpl = templates.filter(item => item.name === template) || [];
 
   tpl = tpl[0];
@@ -22,7 +22,16 @@ module.exports = function({projectName, template}) {
     return console.log(chalk.red('\n x 未找到项目模板')) ;
   }
 
-  const gitUrl = tpl.url;
+  let gitUrl = '';
+
+  if (remote === 1) {
+    gitUrl = tpl.url;
+  }
+
+  if (remote === 2) {
+    gitUrl = tpl.remote;
+  }
+
   const branch = tpl.branch;
 
   spinner.start();
