@@ -28,7 +28,9 @@ module.exports = (opts, config) => {
 
   const autoprefixerCfg = config.autoprefixer || {};
   const base64Cfg = config.base64 || {};
-  const imgPattern = '[\\.\\/]+' + '(' + src + ')?' + (src.length ? '/' : '') + 'images';
+  // 修复图片路径匹配问题
+  const imgSrc = src.replace('/src', '');
+  const imgPattern = '[\\.\\/]+' + '(' + imgSrc + ')?' + (imgSrc.length ? '/' : '') + 'images';
 
   return gulp.src([sassDir, tplDirRoot + '*.scss'])
     .pipe(debug({title: 'SLICE-CSS: ' + gUtil.colors.green('✔')}))
@@ -41,7 +43,5 @@ module.exports = (opts, config) => {
       return utils.fixedWinPath(__path);
     }))
     .pipe(base64(base64Cfg))
-    .pipe(gulp.dest(projectDir + src + '/css'))
     .pipe(gulp.dest(buildDir + '/assets' + '/css')) // 为了修复 base64 没替换问题
-    .pipe(gulp.dest(projectDir + src + '/css'))
 }
