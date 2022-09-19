@@ -1,6 +1,6 @@
 {
   "name": "slice-cli",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "generator smarty pages ",
   "main": "index.js",
   "directories": {

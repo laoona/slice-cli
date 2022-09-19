@@ -8,7 +8,7 @@
 
 module.exports = function (options) {
   const zip = options.zip;
-  const cos = options.cssOutputStyle || 'compact';
+  const cos = options.cssOutputStyle || 'expanded';
   const sprDir = options.spriteDir || '';
   const isIm = options.imagemini;
 

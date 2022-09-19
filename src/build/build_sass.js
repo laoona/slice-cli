@@ -24,7 +24,7 @@ module.exports = (opts, config) => {
   const buildDir = path.join(projectDir, '/dist');
 
   const tplDirRoot = projectDir + '/views/**/';
-  const outputStyle = opts.outputStyle || 'compact';
+  const outputStyle = opts.outputStyle;
 
   const autoprefixerCfg = config.autoprefixer || {};
   const base64Cfg = config.base64 || {};
@@ -42,6 +42,6 @@ module.exports = (opts, config) => {
     }))
     .pipe(base64(base64Cfg))
     .pipe(gulp.dest(projectDir + src + '/css'))
-    // .pipe(gulp.dest(buildDir + '/assets' + '/css'))
-    // .pipe(gulp.dest(projectDir + src + '/css'))
+    .pipe(gulp.dest(buildDir + '/assets' + '/css')) // 为了修复 base64 没替换问题
+    .pipe(gulp.dest(projectDir + src + '/css'))
 }

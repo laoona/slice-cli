@@ -37,7 +37,7 @@ program
   .command('build')
   .alias('b')
   .option('-z, --zip', '将build目录打包成build.zip')
-  .option('-c, --cssOutputStyle <type>', 'sass的编译风格，取值范围：nested,expanded,compact,compressed, 默认:compact')
+  .option('-c, --cssOutputStyle <type>', 'sass的编译风格，取值范围：expanded|compressed, 默认:expanded')
   .option('-s, --spriteDir <DIR>', '通过指定目录，自动生成css sprite')
   .option('-i, --imagemini', '是否开启图片压缩')
   .description('输出项目页面')
