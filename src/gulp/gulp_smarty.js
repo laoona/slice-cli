@@ -21,6 +21,10 @@ const distDir = path.join(projectDir, './dist/views');
 module.exports = (config = {}) => {
   const smarty4jsConf = config.smarty4jsConf || {};
 
+  if (smarty4jsConf.baseDir === undefined) {
+    smarty4jsConf.baseDir = baseDir;
+  }
+
   return new Promise((resolve => {
     gulp.src([srcFiles])
       .pipe(smarty4js(smarty4jsConf))
